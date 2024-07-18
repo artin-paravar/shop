@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: `https://shop-six-steel.vercel.app`,
+  baseURL: "https://shop-dz8e.onrender.com",
 });
 export async function getProducts() {
   const { data } = await client("/api/shopitem/list");
