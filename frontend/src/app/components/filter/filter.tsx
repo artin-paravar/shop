@@ -13,7 +13,7 @@ export const FilterItem = ({ category, setcategory }: PropsCategory) => {
           <hr className="w-full bg-black " />
           <h2>Category</h2>
           <div className="flex gap-2">
-{/*             <label htmlFor="all" className={category === "All" ? "active" : ""}>
+            <label htmlFor="all" className={category === "All" ? "active" : ""}>
               <input
                 onClick={() => setcategory("All")}
                 type="radio"
@@ -22,7 +22,7 @@ export const FilterItem = ({ category, setcategory }: PropsCategory) => {
               />
               <span className="checkmark"></span>
               All
-            </label> */}
+            </label>
           </div>
           {/*  */}
           <div className="flex gap-2">
