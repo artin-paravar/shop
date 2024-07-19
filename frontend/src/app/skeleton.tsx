@@ -5,7 +5,7 @@ export const SkeletonPage = ({ cards }: any) => {
     .map((_, i) => (
       <div
         key={i}
-        className=" w-full flex items-center justify-between  sm:max-w-[320px] cursor-pointer rounded-lg flex-col object-contain"
+        className="mb-5 w-full flex items-center justify-between  sm:max-w-[320px] cursor-pointer rounded-lg flex-col object-contain"
       >
         <Skeleton
           sx={{ bgcolor: "grey.300" }}

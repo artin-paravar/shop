@@ -24,7 +24,7 @@ const addshopitem = async (req, res) => {
 const listitem = async (req, res) => {
   try {
     const items = await ShopItem.find({});
-    res.json({ success: true, data: items });
+    res.json(items);
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "error" });

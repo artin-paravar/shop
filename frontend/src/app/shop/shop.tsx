@@ -1,28 +1,18 @@
-import { useEffect, useState } from "react";
-import { Product } from "./product";
 import "./shop.css";
 import { FilterItem } from "../components/filter/filter";
-import { LoadingPage } from "../components/loading/loading";
-import { getProducts } from "../services/api";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import { useProducts } from "../services/queries";
+import { Product } from "./product";
+import { LoadingPage } from "../components/loading/loading";
 
 export function Shop() {
+  const productsQuery = useProducts();
   const [Category, setcategory] = useState<string>("All");
-  const [Products, setProducts] = useState([]);
-  const [Loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getProducts()
-      .then((result) => {
-        if (result.data) {
-          setProducts(result.data);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  console.log(productsQuery.data);
+  //
+  if (productsQuery.isLoading) return <LoadingPage />;
+  //
 
   return (
     <div className="shop">
@@ -31,28 +21,43 @@ export function Shop() {
       <div className="w-full sm:p-0 p-4">
         <h1 className="shopTitle mb-4">Shop</h1>
         <div className="pb-5 flex  flex-wrap justify-center  items-center gap-10">
-          {Loading ? (
-            <LoadingPage />
-          ) : (
-            Products.map(
-              ({ category, _id, price, title, image, description }: any) => {
-                if (Category === "All" || category === Category) {
-                  return (
-                    <Link key={_id} to={`/shop/${_id}`}>
-                      <Product
-                        id={_id}
-                        price={price}
-                        description={description}
-                        title={title}
-                        image={image}
-                        category={category}
-                      />
-                    </Link>
-                  );
+          {productsQuery.data?.pages.map((group, index) => (
+            <Fragment key={index}>
+              {group.data.map(
+                ({ category, _id, price, title, image, description }: any) => {
+                  if (Category === "All" || category === Category) {
+                    return (
+                      <Link key={_id} to={`/shop/${_id}`}>
+                        <Product
+                          id={_id}
+                          price={price}
+                          description={description}
+                          title={title}
+                          image={image}
+                          category={category}
+                        />
+                      </Link>
+                    );
+                  }
                 }
-              }
-            )
-          )}
+              )}
+            </Fragment>
+          ))}
+        </div>
+        <div className="w-full flex justify-center items-center p-4">
+          <button
+            className="p-4 bg-blue-500 text-white rounded-lg"
+            onClick={() => productsQuery.fetchNextPage()}
+            disabled={
+              !productsQuery.hasNextPage || productsQuery.isFetchingNextPage
+            }
+          >
+            {productsQuery.isFetchingNextPage
+              ? "Loading more..."
+              : productsQuery.hasNextPage
+              ? "Load More"
+              : "Nothing more to load"}
+          </button>
         </div>
       </div>
     </div>
