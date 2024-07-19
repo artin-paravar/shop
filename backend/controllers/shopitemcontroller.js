@@ -23,7 +23,12 @@ const addshopitem = async (req, res) => {
 //all shopitem
 const listitem = async (req, res) => {
   try {
-    const items = await ShopItem.find({});
+    const page = req.query.page || 1;
+    const limit = (req.query.limit = 5);
+    const items = await ShopItem.find({})
+      .skip(page * limit)
+      .limit(limit);
+
     res.json(items);
   } catch (error) {
     console.log(error);

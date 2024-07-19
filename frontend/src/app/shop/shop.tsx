@@ -9,11 +9,10 @@ import { LoadingPage } from "../components/loading/loading";
 export function Shop() {
   const productsQuery = useProducts();
   const [Category, setcategory] = useState<string>("All");
-  console.log(productsQuery.data);
+
   //
   if (productsQuery.isLoading) return <LoadingPage />;
   //
-
   return (
     <div className="shop">
       <FilterItem category={Category} setcategory={setcategory} />
@@ -21,9 +20,9 @@ export function Shop() {
       <div className="w-full sm:p-0 p-4">
         <h1 className="shopTitle mb-4">Shop</h1>
         <div className="pb-5 flex  flex-wrap justify-center  items-center gap-10">
-          {productsQuery.data?.pages.map((group, index) => (
+          {productsQuery.data?.pages.map((item, index) => (
             <Fragment key={index}>
-              {group.data.map(
+              {item?.map(
                 ({ category, _id, price, title, image, description }: any) => {
                   if (Category === "All" || category === Category) {
                     return (

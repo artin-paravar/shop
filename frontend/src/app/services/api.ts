@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "https://shop-dz8e.onrender.com" || "http://localhost:8000",
+  baseURL: "https://shop-dz8e.onrender.com",
 });
 
 export async function getProducts() {
