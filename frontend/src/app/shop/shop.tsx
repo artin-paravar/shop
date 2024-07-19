@@ -13,6 +13,7 @@ export function Shop() {
   //
   if (productsQuery.isLoading) return <LoadingPage />;
   //
+  // console.log(productsQuery.fetchNextPage());
   return (
     <div className="shop">
       <FilterItem category={Category} setcategory={setcategory} />
@@ -43,9 +44,9 @@ export function Shop() {
             </Fragment>
           ))}
         </div>
-        <div className="w-full flex justify-center items-center p-4">
+        <div className="w-full flex justify-center  m-5">
           <button
-            className="p-4 bg-blue-500 text-white rounded-lg"
+            className="p-4 w-full max-w-[250px] bg-black text-white rounded-lg"
             onClick={() => productsQuery.fetchNextPage()}
             disabled={
               !productsQuery.hasNextPage || productsQuery.isFetchingNextPage

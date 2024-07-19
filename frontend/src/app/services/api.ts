@@ -1,7 +1,7 @@
 import axios from "axios";
-
+// https://shop-dz8e.onrender.com
 const client = axios.create({
-  baseURL: "https://shop-dz8e.onrender.com",
+  baseURL: "http://localhost:8000",
 });
 
 export async function getProducts() {
@@ -16,7 +16,7 @@ export async function getProduct(id: number) {
 //react query
 export const Productsload = async ({ pageParam }: { pageParam: number }) => {
   const { data } = await client<any>(
-    `/api/shopitem/list?_page=${pageParam + 1}&_limit=3`
+    `/api/shopitem/list?_page=${pageParam}&_limit=4`
   );
   return data;
 };

@@ -23,8 +23,9 @@ const addshopitem = async (req, res) => {
 //all shopitem
 const listitem = async (req, res) => {
   try {
-    const page = req.query.page || 1;
-    const limit = (req.query.limit = 5);
+    const page = req.query._page;
+    const limit = req.query._limit;
+
     const items = await ShopItem.find({})
       .skip(page * limit)
       .limit(limit);
