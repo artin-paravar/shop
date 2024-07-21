@@ -6,7 +6,6 @@ import { useProducts } from "../services/queries";
 import { Product } from "./product";
 import { LoadingPage } from "../components/loading/loading";
 import { filterItem } from "../services/api";
-import { useShoppingCart } from "../context/shop-context";
 
 export function Shop() {
   const [Category, setcategory] = useState<string>("All");

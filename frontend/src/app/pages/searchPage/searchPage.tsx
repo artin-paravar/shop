@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { searchItem } from "../../services/api";
 import { useShoppingCart } from "../../context/shop-context";
 import { Link } from "react-router-dom";
