@@ -9,6 +9,7 @@ import Cart from "./cart/cart";
 import { Toaster } from "react-hot-toast";
 import { Profile } from "./pages/profile/profile";
 import { useShoppingCart } from "./context/shop-context";
+import { SearchPage } from "./pages/searchPage/searchPage";
 const App = () => {
   const { token } = useShoppingCart();
 
@@ -18,6 +19,7 @@ const App = () => {
       <Toaster position="top-center" toastOptions={{ duration: 1000 }} />
       <Routes>
         <Route path="/" element={<Shop />} />
+        <Route path="/search" element={<SearchPage />} />
 
         <Route
           path="/profile"

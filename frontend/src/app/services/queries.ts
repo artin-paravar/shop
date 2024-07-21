@@ -14,6 +14,7 @@ export function useProducts() {
       }
       return lastPageParam + 1;
     },
+
     getPreviousPageParam: (_, __, firstPageParam) => {
       if (firstPageParam <= 1) {
         return undefined;

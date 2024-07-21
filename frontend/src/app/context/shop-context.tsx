@@ -26,6 +26,8 @@ type ShoppingCartContext = {
   user: any;
   setUser: React.Dispatch<React.SetStateAction<any>>;
   localhost: any;
+  inputData: string;
+  setinputData: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -37,6 +39,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [cartItems, setCartItems] = useState<any>({});
   const [token, setToken] = useState<any>("");
   const [user, setUser] = useState<any>();
+  const [inputData, setinputData] = useState<string>("");
+
   //
 
   const loadCartData = async (token: any) => {
@@ -119,13 +123,13 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     let totalamount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let iteminfo = Products.data?.find(
+        let iteminfo = Products?.find(
           (product: Products) => product._id === item
         );
         totalamount += iteminfo?.price * cartItems[item];
       }
     }
-    return totalamount;
+    return Math.round(totalamount);
   }
 
   return (
@@ -142,6 +146,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         user,
         setUser,
         localhost,
+        inputData,
+        setinputData,
       }}
     >
       {children}

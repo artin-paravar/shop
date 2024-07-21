@@ -23,10 +23,27 @@ const addshopitem = async (req, res) => {
 //all shopitem
 const listitem = async (req, res) => {
   try {
-    const page = req.query._page;
-    const limit = req.query._limit;
+    const page = req.query.page;
+    const limit = req.query.limit;
+    const search = req.query.search || "";
+    let category = req.query.category || "All";
 
-    const items = await ShopItem.find({})
+    const categoryOption = [
+      "men's clothing",
+      "jewelery",
+      "electronics",
+      "women's clothing",
+    ];
+
+    category === "All"
+      ? (category = [...categoryOption])
+      : (category = req.query.category.split(","));
+
+    const items = await ShopItem.find({
+      title: { $regex: search, $options: "i" },
+    })
+      .where("category")
+      .in([...category])
       .skip(page * limit)
       .limit(limit);
 
@@ -36,7 +53,6 @@ const listitem = async (req, res) => {
     res.json({ success: false, message: "error" });
   }
 };
-
 //remove shop item
 const removeitem = async (req, res) => {
   try {

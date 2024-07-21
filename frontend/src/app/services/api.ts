@@ -4,7 +4,7 @@ const client = axios.create({
 });
 
 export async function getProducts() {
-  const { data } = await client("/api/shopitem/list");
+  const { data } = await client(`/api/shopitem/list`);
   return data;
 }
 
@@ -15,7 +15,15 @@ export async function getProduct(id: number) {
 //react query
 export const Productsload = async ({ pageParam }: { pageParam: number }) => {
   const { data } = await client<any>(
-    `/api/shopitem/list?_page=${pageParam}&_limit=4`
+    `/api/shopitem/list?page=${pageParam}&limit=4`
   );
+  return data;
+};
+export const filterItem = async (Category: string) => {
+  const { data } = await client<any>(`/api/shopitem/list?category=${Category}`);
+  return data;
+};
+export const searchItem = async (inputData: string) => {
+  const { data } = await client<any>(`/api/shopitem/list?search=${inputData}`);
   return data;
 };
