@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./filter.css";
 import { searchandFilterItem } from "../../services/api";
 import { useShoppingCart } from "../../context/shop-context";
-import { LoadingPage } from "../loading/loading";
 type PropsCategory = {
   category: string;
   setcategory: React.Dispatch<React.SetStateAction<string>>;
