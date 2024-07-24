@@ -1,3 +1,4 @@
+import { set } from "mongoose";
 import ShopItem from "../models/shopitem.js";
 import fs from "fs";
 
@@ -25,7 +26,7 @@ const listitem = async (req, res) => {
   try {
     const page = req.query.page;
     const limit = req.query.limit;
-    const search = req.query.search || "";
+    const { search } = req.query;
     let category = req.query.category || "All";
 
     const categoryOption = [
@@ -39,15 +40,24 @@ const listitem = async (req, res) => {
       ? (category = [...categoryOption])
       : (category = req.query.category.split(","));
 
+    //search
+    const title = new RegExp(search, "i");
     const items = await ShopItem.find({
-      title: { $regex: search, $options: "i" },
+      title: title,
     })
+
       .where("category")
       .in([...category])
       .skip(page * limit)
       .limit(limit);
 
-    res.json(items);
+    const categorymap = items.map((item) => {
+      return item.category;
+    });
+
+    const set = new Set(categorymap);
+    const itemcategory = [...set];
+    res.json({ items, itemcategory });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "error" });

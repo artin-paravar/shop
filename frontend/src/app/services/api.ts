@@ -1,7 +1,8 @@
 import axios from "axios";
 const client = axios.create({
-  baseURL: "https://shop-dz8e.onrender.com",
+  baseURL: "http://localhost:8000",
 });
+// shop-dz8e.onrender.com
 
 export async function getProducts() {
   const { data } = await client(`/api/shopitem/list`);
@@ -19,11 +20,15 @@ export const Productsload = async ({ pageParam }: { pageParam: number }) => {
   );
   return data;
 };
-export const filterItem = async (Category: string) => {
-  const { data } = await client<any>(`/api/shopitem/list?category=${Category}`);
-  return data;
-};
-export const searchItem = async (inputData: string) => {
-  const { data } = await client<any>(`/api/shopitem/list?search=${inputData}`);
+
+export const searchandFilterItem = async (
+  inputData: string,
+  Category: string
+) => {
+  const { data } = await client<any>(
+    `api/shopitem/list?search=${inputData || null}&&category=${
+      Category || null
+    }`
+  );
   return data;
 };

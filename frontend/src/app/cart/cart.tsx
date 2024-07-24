@@ -20,12 +20,11 @@ export default function Cart() {
       setProducts(result);
     });
   }, []);
-
   return (
     <>
       {!Loading ? (
         <div className="cart p-4">
-          {Products?.map((item: Products) => {
+          {Products?.items?.map((item: Products) => {
             if (cartItems[item._id] > 0)
               return <CartItem key={item._id} {...item} id={item._id} />;
           })}

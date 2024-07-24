@@ -8,11 +8,9 @@ import ProductItem from "./shop/productItem";
 import Cart from "./cart/cart";
 import { Toaster } from "react-hot-toast";
 import { Profile } from "./pages/profile/profile";
-import { useShoppingCart } from "./context/shop-context";
 import { SearchPage } from "./pages/searchPage/searchPage";
+import { PrivateRoute } from "./privateRoute";
 const App = () => {
-  const { token } = useShoppingCart();
-
   return (
     <>
       <Navbar />
@@ -21,29 +19,26 @@ const App = () => {
         <Route path="/" element={<Shop />} />
         <Route path="/search" element={<SearchPage />} />
 
-        <Route
-          path="/profile"
-          element={token ? <Profile /> : <Navigate to="/" />}
-        />
+        <Route element={<PrivateRoute />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/shop/:id" element={<ProductItem />} />
+        </Route>
 
         <Route
           path="/login"
-          element={!token ? <Login /> : <Navigate to="/" />}
+          element={
+            !localStorage.getItem("token") ? <Login /> : <Navigate to="/" />
+          }
         />
         <Route
           path="/signup"
-          element={!token ? <Signup /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/cart"
-          element={token ? <Cart /> : <Navigate to="/login" />}
+          element={
+            !localStorage.getItem("token") ? <Signup /> : <Navigate to="/" />
+          }
         />
 
         <Route path="*" element={<Notfound />} />
-        <Route
-          path="/shop/:id"
-          element={token ? <ProductItem /> : <Navigate to="/login" />}
-        />
       </Routes>
     </>
   );

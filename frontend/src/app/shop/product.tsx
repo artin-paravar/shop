@@ -2,7 +2,7 @@ import { useShoppingCart } from "../context/shop-context";
 export const Product = ({ title, price, image }: any) => {
   const { localhost } = useShoppingCart();
   return (
-    <div className="product hover:scale-105  flex items-center justify-between max-w-[250px] sm:max-w-[320px] cursor-pointer rounded-lg flex-col object-contain">
+    <div className="product hover:scale-105  flex items-center justify-between  cursor-pointer rounded-lg flex-col object-contain">
       <div className="w-full sm:h-[430px] ">
         <img src={`${localhost}/images/` + image} alt="/" />
       </div>

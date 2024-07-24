@@ -8,7 +8,7 @@ import {
 import { Products } from "../type/type";
 import { getProducts } from "../services/api";
 import axios from "axios";
-const localhost = "https://shop-dz8e.onrender.com";
+const localhost = "http://localhost:8000";
 
 type ShoppingCartProviderProps = {
   children: ReactNode;
@@ -28,6 +28,8 @@ type ShoppingCartContext = {
   localhost: any;
   inputData: string;
   setinputData: React.Dispatch<React.SetStateAction<string>>;
+  Category: string;
+  setcategory: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -40,6 +42,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [token, setToken] = useState<any>("");
   const [user, setUser] = useState<any>();
   const [inputData, setinputData] = useState<string>("");
+  const [Category, setcategory] = useState<string>("All");
 
   //
 
@@ -63,7 +66,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   useEffect(() => {
     getProducts().then((result) => {
-      setProducts(result);
+      setProducts(result.items);
     });
   }, []);
   //
@@ -148,6 +151,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         localhost,
         inputData,
         setinputData,
+        Category,
+        setcategory,
       }}
     >
       {children}

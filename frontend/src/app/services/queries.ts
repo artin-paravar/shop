@@ -9,7 +9,7 @@ export function useProducts() {
     queryFn: Productsload,
     initialPageParam: 0,
     getNextPageParam: (lastPage, _, lastPageParam) => {
-      if (lastPage.length === 0) {
+      if (lastPage.items.length === 0) {
         return undefined;
       }
       return lastPageParam + 1;

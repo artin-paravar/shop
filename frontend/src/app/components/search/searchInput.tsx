@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useShoppingCart } from "../../context/shop-context";
 import { useNavigate } from "react-router-dom";
@@ -7,26 +7,28 @@ import toast from "react-hot-toast";
 export const Search = () => {
   const [state, setstate] = useState("");
   const navigate = useNavigate();
-  const { setinputData } = useShoppingCart();
+  const { setinputData, Category, setcategory } = useShoppingCart();
+
   const handelsearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setcategory("All");
     setinputData(state);
 
-    if (state === "" && window.location.pathname != "/search") {
+    if (state === "" && window.location.pathname != "/search/") {
       toast.error("type something");
     } else {
-      navigate("/search");
+      navigate(`/search/?q=${state}&&category=${Category}`);
     }
-    if (window.location.pathname == "/search" && state === "") {
+    if (window.location.pathname == "/search/" && state === "") {
       navigate("/");
-      toast.error(" type something for  result");
-      setstate("");
+      toast.error(" type something for result");
     }
   };
+
   const handelonChange = (e: any) => {
     setstate(e.target.value);
   };
-
+  // console.log(object);
   return (
     <form
       onSubmit={handelsearch}

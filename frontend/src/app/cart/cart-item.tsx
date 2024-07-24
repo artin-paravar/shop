@@ -13,6 +13,8 @@ export const CartItem = ({ id }: CartItemProps) => {
   const [Products, setProducts] = useState<Products>([]);
   const [Loading, setLoading] = useState(true);
   const { cartItems, localhost } = useShoppingCart();
+  const { increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
+    useShoppingCart();
 
   useEffect(() => {
     getProduct(id).then((result) => {
@@ -20,8 +22,6 @@ export const CartItem = ({ id }: CartItemProps) => {
       setLoading(false);
     });
   }, []);
-  const { increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
-    useShoppingCart();
 
   return (
     <>
