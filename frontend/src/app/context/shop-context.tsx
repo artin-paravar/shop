@@ -8,7 +8,7 @@ import {
 import { Products } from "../type/type";
 import { getProducts } from "../services/api";
 import axios from "axios";
-const localhost = "https://shop-dz8e.onrender.com";
+const localhost = "http://localhost:8000" || "https://shop-dz8e.onrender.com";
 
 type ShoppingCartProviderProps = {
   children: ReactNode;

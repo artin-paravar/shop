@@ -45,7 +45,6 @@ const listitem = async (req, res) => {
     const items = await ShopItem.find({
       title: title,
     })
-
       .where("category")
       .in([...category])
       .skip(page * limit)
@@ -55,7 +54,7 @@ const listitem = async (req, res) => {
       return item.category;
     });
 
-    const set = new Set(categorymap);
+    const set = new Set([["All"], ...categorymap]);
     const itemcategory = [...set];
     res.json({ items, itemcategory });
   } catch (error) {

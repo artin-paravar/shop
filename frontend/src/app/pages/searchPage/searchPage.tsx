@@ -16,7 +16,6 @@ export const SearchPage = () => {
     searchandFilterItem(inputData, Category).then((result) => {
       setsearchitem(result.items);
       setloading(false);
-      navigate(`/search/?q=${inputData}&&category=${Category}`);
       if (window.location.search == "?q=&&category=All") {
         navigate("/");
       }

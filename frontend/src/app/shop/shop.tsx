@@ -1,13 +1,20 @@
 import "./shop.css";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../services/queries";
 import { Product } from "./product";
 import { LoadingPage } from "../components/loading/loading";
+import { useInView } from "react-intersection-observer";
+import { Loadinginfinite } from "../components/loading/loadinginfinite";
 
 export function Shop() {
   const productsQuery = useProducts();
-
+  const { ref, inView } = useInView();
+  useEffect(() => {
+    if (inView && productsQuery.hasNextPage) {
+      productsQuery.fetchNextPage();
+    }
+  }, [inView, productsQuery.hasNextPage, productsQuery.fetchNextPage]);
   if (productsQuery.isLoading) return <LoadingPage />;
   //
 
@@ -38,26 +45,10 @@ export function Shop() {
           ))}
         </div>
         <div className=" flex justify-center  m-[40px_0]">
-          {productsQuery.hasNextPage ? (
-            <button
-              style={
-                !productsQuery.hasNextPage
-                  ? { display: "none" }
-                  : { display: "flex" }
-              }
-              className="p-4 items-center justify-center flex w-full max-w-[250px] bg-black text-white rounded-lg"
-              onClick={() => productsQuery.fetchNextPage()}
-              disabled={
-                !productsQuery.hasNextPage || productsQuery.isFetchingNextPage
-              }
-            >
-              {productsQuery.isFetchingNextPage
-                ? "Loading more..."
-                : productsQuery.hasNextPage
-                ? "Load More"
-                : "Nothing more to load"}
-            </button>
+          {productsQuery.isFetching && productsQuery.hasNextPage ? (
+            <Loadinginfinite />
           ) : null}
+          {productsQuery.hasNextPage ? <p ref={ref}> </p> : null}
         </div>
       </div>
     </div>
