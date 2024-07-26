@@ -8,6 +8,7 @@ import {
 import { Products } from "../type/type";
 import { getProducts } from "../services/api";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 const localhost = "http://localhost:8000" || "https://shop-dz8e.onrender.com";
 
 type ShoppingCartProviderProps = {
@@ -26,10 +27,8 @@ type ShoppingCartContext = {
   user: any;
   setUser: React.Dispatch<React.SetStateAction<any>>;
   localhost: any;
-  inputData: string;
-  setinputData: React.Dispatch<React.SetStateAction<string>>;
-  Category: string;
-  setcategory: React.Dispatch<React.SetStateAction<string>>;
+  searchParams: URLSearchParams;
+  setSearchParams: any;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -40,9 +39,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [Products, setProducts] = useState<any>([]);
   const [cartItems, setCartItems] = useState<any>({});
   const [token, setToken] = useState<any>("");
+  const [searchParams, setSearchParams] = useSearchParams();
   const [user, setUser] = useState<any>();
-  const [inputData, setinputData] = useState<string>("");
-  const [Category, setcategory] = useState<string>("All");
 
   //
 
@@ -148,11 +146,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         setToken,
         user,
         setUser,
+        searchParams,
+        setSearchParams,
         localhost,
-        inputData,
-        setinputData,
-        Category,
-        setcategory,
       }}
     >
       {children}

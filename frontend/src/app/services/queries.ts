@@ -39,23 +39,9 @@ export function ProductQuery(id: number) {
     queryFn: () => getProduct(id),
   });
 }
-// export function search() {
-//   return useInfiniteQuery({
-//     queryKey: ["searchProduct"],
-//     queryFn: () => searchandFilterItem(Category, inputData),
-//     initialPageParam: 0,
-//     getNextPageParam: (lastPage, _, lastPageParam) => {
-//       if (lastPage.items.length === 0) {
-//         return undefined;
-//       }
-//       return lastPageParam + 1;
-//     },
-
-//     getPreviousPageParam: (_, __, firstPageParam) => {
-//       if (firstPageParam <= 1) {
-//         return undefined;
-//       }
-//       return firstPageParam - 1;
-//     },
-//   });
-// }
+export function searchProductQuery(Category: string, debounced: any) {
+  return useQuery({
+    queryKey: ["getProduct2", { Category, debounced }],
+    queryFn: () => searchandFilterItem(debounced, Category),
+  });
+}

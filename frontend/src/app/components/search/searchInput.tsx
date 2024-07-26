@@ -1,42 +1,43 @@
-import { useState } from "react";
-
-import { useShoppingCart } from "../../context/shop-context";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useShoppingCart } from "../../context/shop-context";
 
 export const Search = () => {
-  const [state, setstate] = useState("");
   const navigate = useNavigate();
-  const { setinputData, Category, setcategory } = useShoppingCart();
 
+  const { searchParams, setSearchParams } = useShoppingCart();
+  //
+  const Category = searchParams.get("category") || "All";
+  const q = searchParams.get("q") as string;
+  //
   const handelsearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setcategory("All");
-    setinputData(state);
-
-    if (state === "" && window.location.pathname != "/search/") {
+    if (!q) {
       toast.error("type something");
     } else {
-      navigate(`/search/?q=${state}&&category=${Category}`);
-    }
-    if (window.location.pathname == "/search/" && state === "") {
-      navigate("/");
-      toast.error(" type something for result");
+      navigate(`/search/?q=${q}&&category=${Category}`);
     }
   };
 
-  const handelonChange = (e: any) => {
-    setstate(e.target.value);
-  };
-  // console.log(object);
   return (
     <form
       onSubmit={handelsearch}
       className="flex  ml-3 w-full sm:w-auto items-center  justify-center"
     >
       <input
-        onChange={handelonChange}
+        onChange={(e) =>
+          setSearchParams(
+            (prev: any) => {
+              prev.set("q", e.target.value);
+              prev.set("category", "All");
+
+              return prev;
+            },
+            { replace: true }
+          )
+        }
         type="text"
+        value={q ? (searchParams?.get("q") as string) : ""}
         className="sm:w-auto w-full p-[6px] outline-none"
       />
       <button type="submit" className="text-white bg-blue-500  p-[6px]">
