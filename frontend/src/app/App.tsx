@@ -10,6 +10,8 @@ import { Toaster } from "react-hot-toast";
 import { Profile } from "./pages/profile/profile";
 import { SearchPage } from "./pages/searchPage/searchPage";
 import { PrivateRoute } from "./privateRoute";
+import { Contact } from "./pages/contactus/contact";
+import { Footer } from "./components/footer/footer";
 const App = () => {
   return (
     <>
@@ -18,11 +20,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Shop />} />
         <Route path="/search" element={<SearchPage />} />
-
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/:id" element={<ProductItem />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/shop/:id" element={<ProductItem />} />
         </Route>
 
         <Route
@@ -40,6 +42,7 @@ const App = () => {
 
         <Route path="*" element={<Notfound />} />
       </Routes>
+      <Footer />
     </>
   );
 };

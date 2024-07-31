@@ -8,7 +8,7 @@ const addshopitem = async (req, res) => {
   const item = new ShopItem({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price,
+    price: Number(req.body.price),
     category: req.body.category,
     image: image_filename,
   });
@@ -29,12 +29,7 @@ const listitem = async (req, res) => {
     const { search } = req.query;
     let category = req.query.category || "All";
 
-    const categoryOption = [
-      "men's clothing",
-      "jewelery",
-      "electronics",
-      "women's clothing",
-    ];
+    const categoryOption = ["موبایل", "ساعت هوشمند", "اسپیکر", "کنسول بازی"];
 
     category === "All"
       ? (category = [...categoryOption])
@@ -54,7 +49,7 @@ const listitem = async (req, res) => {
       return item.category;
     });
 
-    const set = new Set([["All"], ...categorymap]);
+    const set = new Set(["All", ...categorymap]);
     const itemcategory = [...set];
     res.json({ items, itemcategory });
   } catch (error) {

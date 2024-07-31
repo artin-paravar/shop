@@ -21,6 +21,7 @@ app.use("/api/shopitem", shopitemRouter);
 app.use("/images", express.static("uploads"));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
+
 app.get("/", (req, res) => {
   res.json("ready");
 });

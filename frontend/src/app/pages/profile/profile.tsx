@@ -8,6 +8,7 @@ export const Profile = () => {
   const [show, setshow] = useState(false);
   const [UserData, setUserData] = useState<any>({});
   const { setToken, user } = useShoppingCart();
+  document.title = "پروفایل";
 
   const handelLogout = () => {
     localStorage.removeItem("token");

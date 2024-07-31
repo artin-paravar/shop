@@ -1,16 +1,25 @@
 export type Products =
   | {
-      id: number;
-      title: string;
-      price: number;
-      description: string;
-      category: string;
-      image: any;
-      rating: Rating;
+      _id?: string | number;
+      title?: string;
+      price?: number;
+      description?: string;
+      category?: string;
+      image?: any;
     }
   | any;
 
-interface Rating {
-  rate: number;
-  count: number;
-}
+export type IMG = {
+  id: number;
+  image: string;
+  text?: string;
+  link?: any;
+};
+
+export type footer = {
+  id: number;
+  text: string;
+};
+export type OPEN = {
+  open: boolean;
+};

@@ -1,48 +1,88 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Product } from "../../shop/product";
-import { LoadingPage } from "../../components/loading/loading";
-import { FilterItem } from "../../components/filter/filter";
 import { useDebounce } from "../../components/debounce/usedebounce";
 import { searchProductQuery } from "../../services/queries";
+import { useShoppingCart } from "../../context/shop-context";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { Loadinginfinite } from "../../components/loading/loadinginfinite";
+import { OPEN } from "../../type/type";
 
-export const SearchPage = () => {
-  const [searchParams] = useSearchParams();
-  const Category = searchParams.get("category") || "All";
-  const q = searchParams.get("q") as string;
+export const SearchPage = ({ setopen }: OPEN | any) => {
+  const { q } = useShoppingCart();
   const debounced = useDebounce(q);
+  const { ref, inView } = useInView();
+  const searchitem = searchProductQuery(debounced);
+  const navigate = useNavigate();
+  const handelnavigate = (id: string) => {
+    setopen(false);
+    navigate(id);
+  };
+  //
+  useEffect(() => {
+    if (inView && searchitem.hasNextPage) {
+      searchitem.fetchNextPage();
+    }
+  }, [inView, searchitem.hasNextPage, searchitem.fetchNextPage]);
+  //
+  // useEffect(() => {
+  //   if (!open) {
+  //     navigate("/");
+  //   }
+  // }, [open]);
 
-  const searchitem = searchProductQuery(Category, debounced);
-  if (searchitem.isLoading) return <LoadingPage />;
-  if (searchitem.data.items.length === 0) {
+  if (searchitem.isLoading)
     return (
-      <p className=" w-full h-[100vh] flex items-center justify-center text-[20px]">
-        there is no result for your search
+      <div className=" w-full mt-10 flex items-center justify-center text-[20px]">
+        <Loadinginfinite />
+      </div>
+    );
+  if (!q)
+    return (
+      <div className=" w-full mt-10 flex items-center justify-center text-[20px]"></div>
+    );
+
+  if (searchitem.data?.pages[0].items.length <= 0) {
+    return (
+      <p className=" w-full mt-10 flex items-center justify-center text-[20px]">
+        نتیجه ای یافت نشد
       </p>
     );
   }
   return (
     <>
       <div className="flex">
-        <FilterItem />
-        <div className="w-full sm:p-0 p-4">
+        <div className="w-full sm:p-0 p-4 ">
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 p-5 md:grid-cols-2 sm:grid-cols-1 justify-end items-end gap-7">
-            {searchitem?.data?.items?.map(
-              ({ category, _id, price, title, image, description }: any) => {
-                return (
-                  <Link key={_id} to={`/shop/${_id}`}>
-                    <Product
-                      id={_id}
-                      price={price}
-                      description={description}
-                      SS
-                      title={title}
-                      image={image}
-                      category={category}
-                    />
-                  </Link>
-                );
-              }
+            {searchitem?.data?.pages?.map((item) =>
+              item?.items?.map(
+                ({ category, _id, price, title, image, description }: any) => {
+                  return (
+                    <div
+                      key={_id}
+                      className="cursor-pointer"
+                      onClick={() => handelnavigate(_id)}
+                    >
+                      <Product
+                        id={_id}
+                        price={price}
+                        description={description}
+                        SS
+                        title={title}
+                        image={image}
+                        category={category}
+                      />
+                    </div>
+                  );
+                }
+              )
             )}
+          </div>
+          <div className=" flex justify-center  m-[40px_0]">
+            {searchitem.isFetching && searchitem.hasNextPage ? (
+              <Loadinginfinite />
+            ) : null}
+            {searchitem.hasNextPage ? <p ref={ref}> </p> : null}
           </div>
         </div>
       </div>

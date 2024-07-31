@@ -9,16 +9,16 @@ import { Products } from "../type/type";
 import { getProducts } from "../services/api";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-const localhost = "https://shop-dz8e.onrender.com";
-
+const localhost = "http://localhost:8000";
+// https://shop-dz8e.onrender.com
 type ShoppingCartProviderProps = {
   children: ReactNode;
 };
 
 type ShoppingCartContext = {
-  increaseCartQuantity: (id: number) => void;
-  decreaseCartQuantity: (id: number) => void;
-  removeFromCart: (id: number) => void;
+  increaseCartQuantity: (id: string) => void;
+  decreaseCartQuantity: (id: string) => void;
+  removeFromCart: (id: string) => void;
   cartItems: Products[];
   getTotalcartAmount: () => number;
   getCartItemQuantity: () => any;
@@ -29,6 +29,8 @@ type ShoppingCartContext = {
   localhost: any;
   searchParams: URLSearchParams;
   setSearchParams: any;
+  Category?: string | null;
+  q?: string;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -41,8 +43,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [token, setToken] = useState<any>("");
   const [searchParams, setSearchParams] = useSearchParams();
   const [user, setUser] = useState<any>();
-
-  //
+  const Category = searchParams.get("category");
+  const q = searchParams.get("q")?.toLowerCase().trim(); //
 
   const loadCartData = async (token: any) => {
     const res = await axios.post(
@@ -85,7 +87,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   //
 
-  const increaseCartQuantity = async (itemId: number) => {
+  const increaseCartQuantity = async (itemId: string) => {
     if (!cartItems[itemId]) {
       setCartItems((prev: any) => ({ ...prev, [itemId]: 1 }));
     } else {
@@ -99,7 +101,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       );
     }
   };
-  const decreaseCartQuantity = async (itemId: number) => {
+  const decreaseCartQuantity = async (itemId: string) => {
     setCartItems((prev: any) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     if (token) {
       await axios.post(
@@ -109,7 +111,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       );
     }
   };
-  const removeFromCart = async (itemId: number) => {
+  const removeFromCart = async (itemId: string) => {
     setCartItems((prev: any) => ({ ...prev, [itemId]: 0 }));
     if (token) {
       await axios.post(
@@ -149,6 +151,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         searchParams,
         setSearchParams,
         localhost,
+        Category,
+        q,
       }}
     >
       {children}

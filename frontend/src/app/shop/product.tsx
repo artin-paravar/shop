@@ -1,21 +1,21 @@
 import { useShoppingCart } from "../context/shop-context";
-export const Product = ({ title, price, image }: any) => {
+import { Products } from "../type/type";
+export const Product = ({ title, price, image }: Products) => {
   const { localhost } = useShoppingCart();
   return (
-    <div className="product hover:scale-105  flex items-center justify-between  cursor-pointer rounded-lg flex-col object-contain">
-      <div className="w-full sm:h-[430px] ">
-        <img src={`${localhost}/images/` + image} alt="/" />
-      </div>
-      <div className="description">
-        <p>
-          <b className="line-clamp-1">{title}</b>
-        </p>
-        <p> ${price}</p>
-      </div>
+    <div className="outline-none   hover:scale-105 transition-all  p-2 overflow-hidden ">
+      <img
+        className="w-full h-[400px] object-contain "
+        src={`${localhost}/images/` + image}
+        alt=""
+      />
 
-      <button className="p-2 m-1 border-zinc-500 rounded-md border-solid border">
-        view details
-      </button>
+      <div className="w-[80%] m-auto">
+        <p className="line-clamp-1">{title}</p>
+        <p className="text-gray-600">
+          {[price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} قیمت
+        </p>
+      </div>
     </div>
   );
 };

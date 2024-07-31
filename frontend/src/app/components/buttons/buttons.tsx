@@ -1,24 +1,17 @@
 import { useShoppingCart } from "../../context/shop-context";
-import { Link } from "react-router-dom";
 
 type Props = {
-  itemId: number;
+  itemId: string | any;
 };
 export const Buttons = ({ itemId }: Props) => {
   const { increaseCartQuantity, decreaseCartQuantity, cartItems } =
     useShoppingCart();
   return (
-    <div className="flex items-center justify-between gap-2 ">
-      <Link
-        to="/"
-        className="border border-solid border-zinc-800 p-3 rounded-lg"
-      >
-        continue Shopping
-      </Link>
+    <div className="flex  items-center  gap-2 ">
       {cartItems[itemId] ? (
-        <div className="flex gap-2 justify-center items-center p-[5px_0]">
+        <div className="flex gap-2  justify-between items-center border w-[120px] p-[5px_10px]  ">
           <button
-            className="addToCartBttn"
+            className="hover:animate-pulse text-xl flex items-center justify-center"
             onClick={() => increaseCartQuantity(itemId)}
           >
             +
@@ -26,7 +19,7 @@ export const Buttons = ({ itemId }: Props) => {
           <p className="text-xl">{cartItems[itemId]}</p>
           <button
             onClick={() => decreaseCartQuantity(itemId)}
-            className="addToCartBttn"
+            className="hover:animate-pulse text-3xl flex items-center justify-center "
           >
             -
           </button>
@@ -35,9 +28,9 @@ export const Buttons = ({ itemId }: Props) => {
         <div>
           <button
             onClick={() => increaseCartQuantity(itemId)}
-            className="p-3 m-1 border-zinc-800 rounded-lg border-solid border"
+            className="animate-bounce duration-75 transition-all hover:bg-black p-[7px_15px] m-1 bg-orange-400 text-white rounded-lg border-solid border"
           >
-            add to cart
+            افزودن به سبد خرید{" "}
           </button>
         </div>
       )}
