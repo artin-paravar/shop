@@ -47,7 +47,7 @@ function SliderItem({ data, title }: Products) {
                 className="border-l border-l-gray-200"
                 key={items._id}
               >
-                <Link to={items._id}>
+                <Link to={`product/${items._id}`}>
                   <Product
                     image={items.image}
                     price={items.price}

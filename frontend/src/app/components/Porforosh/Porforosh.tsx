@@ -11,7 +11,7 @@ export const Porforosh = ({ data, title }: Products) => {
         <div className="grid-cols-1 sm:grid-cols-2 md:grid-cols-4 grid gap-4 place-items-center">
           {data?.map((items: Products) => {
             return (
-              <Link key={items._id} to={items._id}>
+              <Link key={items._id} to={`product/${items._id}`}>
                 <PorforoshItem
                   image={items.image}
                   price={items.price}

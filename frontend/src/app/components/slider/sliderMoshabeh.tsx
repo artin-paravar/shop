@@ -13,7 +13,7 @@ import { Product } from "../../shop/product";
 function SliderMoshabeh({ data, title }: Products) {
   const slider = useRef<any>(null);
   const handelNavigate = (id: String) => {
-    window.location.replace(`${id}`);
+    window.location.replace(`/product/${id}`);
   };
   return (
     <div className=" w-full bg-white  rounded-2xl p-3 shadow-[2px_0px_20px_2px_lightgray]">

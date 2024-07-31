@@ -16,7 +16,7 @@ export const SearchPage = ({ setopen }: OPEN | any) => {
   const navigate = useNavigate();
   const handelnavigate = (id: string) => {
     setopen(false);
-    navigate(id);
+    navigate(`product/${id}`);
   };
   //
   useEffect(() => {
