@@ -10,9 +10,9 @@ import { FilterApi } from "../filteritem";
 import SliderMoshabeh from "../components/slider/sliderMoshabeh";
 
 export default function ProductItem() {
+  const { MahsolatMortabat } = FilterApi();
   const { id } = useParams<{ id: string | undefined }>();
   const { localhost } = useShoppingCart();
-  const { MahsolatMortabat } = FilterApi();
   const [choose, SetChoose] = useState("tozih");
   const [Moshahede, SetMoshahede] = useState(false);
 
