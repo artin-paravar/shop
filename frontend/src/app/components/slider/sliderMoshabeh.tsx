@@ -12,7 +12,7 @@ import { Product } from "../../shop/product";
 
 function SliderMoshabeh({ data, title }: Products) {
   const slider = useRef<any>(null);
-  const handelNavigate = (id: String) => {
+  const handelNavigate = (id: any) => {
     window.location.replace(`/product/${id}`);
   };
   return (
@@ -46,11 +46,11 @@ function SliderMoshabeh({ data, title }: Products) {
             return (
               <SwiperSlide
                 className="border-l border-l-gray-200"
-                key={items._id}
+                key={items?._id}
               >
                 <span
                   className="cursor-pointer"
-                  onClick={() => handelNavigate(items._id)}
+                  onClick={() => handelNavigate(items?._id)}
                 >
                   <Product
                     image={items.image}
