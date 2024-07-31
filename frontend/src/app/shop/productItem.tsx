@@ -10,7 +10,7 @@ import { FilterApi } from "../filteritem";
 import SliderMoshabeh from "../components/slider/sliderMoshabeh";
 
 export default function ProductItem() {
-  const { id } = useParams<{ id: string | undefined }>();
+  const { id } = useParams<{ id: any }>();
   const { localhost } = useShoppingCart();
   const { MahsolatMortabat } = FilterApi();
 
