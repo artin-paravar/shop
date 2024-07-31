@@ -7,12 +7,12 @@ import { ProductQuery } from "../services/queries";
 import { useState } from "react";
 import { CommentSection } from "../components/commentSection.tsx/Comment";
 import { FilterApi } from "../filteritem";
-import SliderMoshabeh from "../components/slider/sliderMoshabeh";
+// import SliderMoshabeh from "../components/slider/sliderMoshabeh";
 
 export default function ProductItem() {
   const { id } = useParams<{ id: string | undefined }>();
   const { localhost } = useShoppingCart();
-  const { MahsolatMortabat } = FilterApi();
+  // const { MahsolatMortabat } = FilterApi();
 
   const [choose, SetChoose] = useState("tozih");
   const [Moshahede, SetMoshahede] = useState(false);
