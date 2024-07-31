@@ -13,7 +13,6 @@ export default function ProductItem() {
   const { id } = useParams<{ id: string | undefined }>();
   const { localhost } = useShoppingCart();
   const { MahsolatMortabat } = FilterApi();
-
   const [choose, SetChoose] = useState("tozih");
   const [Moshahede, SetMoshahede] = useState(false);
 
@@ -109,13 +108,7 @@ export default function ProductItem() {
       {/*  */}
       <div className="m-[40px_auto] max-w-[900px] md:p-0 p-5">
         <div className="flex flex-col">
-          <SliderMoshabeh
-            data={MahsolatMortabat(
-              Product?.data?.item?.category,
-              Product?.data?.item?._id
-            )}
-            title="محصولات مرتبط"
-          />
+          <SliderMoshabeh data={MahsolatMortabat()} title="محصولات مرتبط" />
         </div>
       </div>
     </>
