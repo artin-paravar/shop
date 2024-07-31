@@ -1,10 +1,8 @@
-import { useParams } from "react-router-dom";
 import { ProductsQuery } from "./services/queries";
 import { Products } from "./type/type";
 
 export const FilterApi = () => {
   const productsQuery = ProductsQuery();
-  const { id } = useParams<{ id: any }>();
 
   //men
   const phoneCategory = productsQuery?.data?.items?.filter((item: Products) => {
@@ -19,13 +17,10 @@ export const FilterApi = () => {
   const randomItem = productsQuery?.data?.items?.filter((item: Products) => {
     return [item][0]._id.includes("5");
   });
-  const MahsolatMortabat = (category: string) => {
+  const MahsolatMortabat = (category: string, id: string | undefined) => {
+    console.log(category);
     const data = productsQuery?.data?.items?.filter((item: Products) => {
-      if (item) {
-        return item?.category?.includes(category) && item?._id !== id;
-      } else {
-        return null;
-      }
+      return item.category.includes(category) && item?._id !== id;
     });
     return data;
   };

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "https://shop-dz8e.onrender.com",
+  baseURL: "http://localhost:8000",
 });
 
 export async function getProducts() {
@@ -9,7 +9,7 @@ export async function getProducts() {
   return data;
 }
 
-export async function getProduct(id: string) {
+export async function getProduct(id: any) {
   const { data } = await client(`/api/shopitem/${id}`);
   return data;
 }

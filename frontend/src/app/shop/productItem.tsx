@@ -10,14 +10,14 @@ import { FilterApi } from "../filteritem";
 import SliderMoshabeh from "../components/slider/sliderMoshabeh";
 
 export default function ProductItem() {
-  const { id } = useParams<{ id: any }>();
+  const { id } = useParams<{ id: string | undefined }>();
   const { localhost } = useShoppingCart();
   const { MahsolatMortabat } = FilterApi();
 
   const [choose, SetChoose] = useState("tozih");
   const [Moshahede, SetMoshahede] = useState(false);
 
-  const Product = ProductQuery(id);
+  const Product = ProductQuery(id as string);
   //
   if (document.title === "undefined") {
     document.title = "loading";
@@ -111,7 +111,10 @@ export default function ProductItem() {
         <div className="flex flex-col">
           <p className="text-center text-2xl m-[30px_0]">محصولات مرتبط</p>
           <SliderMoshabeh
-            data={MahsolatMortabat(Product?.data?.item?.category)}
+            data={MahsolatMortabat(
+              Product?.data?.item?.category,
+              Product?.data?.item?._id
+            )}
           />
         </div>
       </div>
