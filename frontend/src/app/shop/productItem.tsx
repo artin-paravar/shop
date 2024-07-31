@@ -112,8 +112,8 @@ export default function ProductItem() {
           <p className="text-center text-2xl m-[30px_0]">محصولات مرتبط</p>
           <SliderMoshabeh
             data={MahsolatMortabat(
-              Product?.data?.item?.category,
-              Product?.data?.item?._id
+              Product.data.item.category,
+              Product.data.item._id
             )}
           />
         </div>
