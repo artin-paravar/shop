@@ -1,7 +1,7 @@
 import { Products } from "../../type/type";
 import { useShoppingCart } from "../../context/shop-context";
 
-export const PorforoshItem = ({ id, title, price, image }: Products) => {
+export const PorforoshItem = ({ title, price, image }: Products) => {
   const { localhost } = useShoppingCart();
   return (
     <div>
