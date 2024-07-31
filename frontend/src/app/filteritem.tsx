@@ -18,7 +18,6 @@ export const FilterApi = () => {
     return [item][0]._id.includes("5");
   });
   const MahsolatMortabat = (category: string, id: string | undefined) => {
-    console.log(category);
     const data = productsQuery?.data?.items?.filter((item: Products) => {
       return item.category.includes(category) && item?._id !== id;
     });
