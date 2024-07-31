@@ -6,7 +6,7 @@ import { useShoppingCart } from "../context/shop-context";
 import { ProductQuery } from "../services/queries";
 import { useState } from "react";
 import { CommentSection } from "../components/commentSection.tsx/Comment";
-import { FilterApi } from "../filteritem";
+// import { FilterApi } from "../filteritem";
 // import SliderMoshabeh from "../components/slider/sliderMoshabeh";
 
 export default function ProductItem() {
