@@ -34,7 +34,7 @@ export function ProductsQuery() {
     queryFn: getProducts,
   });
 }
-export function ProductQuery(id: string) {
+export function ProductQuery(id: any) {
   return useQuery({
     queryKey: ["getProduct", { id }],
     queryFn: () => getProduct(id),
