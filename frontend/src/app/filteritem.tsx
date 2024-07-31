@@ -17,11 +17,9 @@ export const FilterApi = () => {
   const randomItem = productsQuery?.data?.items?.filter((item: Products) => {
     return [item][0]._id.includes("5");
   });
-  const MahsolatMortabat = () => {
-    const data = productsQuery?.data?.items?.filter((item: any) => {
-      return item?.category?.includes("موبایل");
-    });
-    return data;
-  };
+  const MahsolatMortabat = productsQuery?.data?.items?.filter((item: any) => {
+    return item?.category?.includes("موبایل");
+  });
+
   return { phoneCategory, consoleCategory, randomItem, MahsolatMortabat };
 };
