@@ -12,9 +12,9 @@ import { Product } from "../../shop/product";
 
 function SliderMoshabeh({ data, title }: Products) {
   const slider = useRef<any>(null);
-  const handelNavigate = (id: any) => {
-    window.location.replace(`/product/${id}`);
-  };
+  // const handelNavigate = (id: any) => {
+  //   window.location.replace(`/product/${id}`);
+  // };
   return (
     <div className=" w-full bg-white  rounded-2xl p-3 shadow-[2px_0px_20px_2px_lightgray]">
       <h1 className="text-center sm:text-[28px] text-[20px] m-[10px_0]">
@@ -50,7 +50,7 @@ function SliderMoshabeh({ data, title }: Products) {
               >
                 <span
                   className="cursor-pointer"
-                  onClick={() => handelNavigate(items?._id)}
+                  // onClick={() => handelNavigate(items?._id)}
                 >
                   <Product
                     image={items.image}

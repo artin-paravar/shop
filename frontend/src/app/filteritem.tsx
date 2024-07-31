@@ -19,7 +19,7 @@ export const FilterApi = () => {
   });
   const MahsolatMortabat = productsQuery?.data?.items?.filter(
     (item: Products) => {
-      return [item][0].category.includes("موبایل");
+      return [item][0]._id.includes("5");
     }
   );
 
