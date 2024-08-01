@@ -16,7 +16,7 @@ export const Profile = () => {
     setToken("");
     setshow(false);
     Navigate("/");
-    toast.success("logout succesfull");
+    toast.success("خروج از حساب با موفقیت انجام شد");
   };
   useEffect(() => {
     if (user) {
@@ -28,14 +28,13 @@ export const Profile = () => {
       <div className="flex flex-col gap-5 p-2">
         <div>
           <h2>
-            your name :
+            اسم شما
             <span className="text-red-500"> {UserData?.fullname}</span>
           </h2>
         </div>
         <div>
           <h2>
-            your email :{" "}
-            <span className="text-red-500"> {UserData?.email}</span>
+            ایمیل شما: <span className="text-red-500"> {UserData?.email}</span>
           </h2>
         </div>
       </div>
@@ -44,7 +43,7 @@ export const Profile = () => {
         onClick={() => setshow(true)}
         className="p-2 bg-black text-white rounded-md flex items-center justify-center "
       >
-        logout
+        خروج
       </button>
 
       <>

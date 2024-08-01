@@ -1,5 +1,5 @@
-import { useShoppingCart } from "../context/shop-context";
-import { Products } from "../type/type";
+import { useShoppingCart } from "../../context/shop-context";
+import { Products } from "../../type/type";
 export const Product = ({ title, price, image }: Products) => {
   const { localhost } = useShoppingCart();
   return (

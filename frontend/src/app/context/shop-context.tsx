@@ -6,15 +6,14 @@ import {
   useState,
 } from "react";
 import { Products } from "../type/type";
-import { getProducts } from "../services/api";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-const localhost = "https://shop-dz8e.onrender.com";
-//
+import { ProductsQuery } from "../services/queries";
+const localhost = "http://localhost:8000";
+//https://shop-dz8e.onrender.com
 type ShoppingCartProviderProps = {
   children: ReactNode;
 };
-
 type ShoppingCartContext = {
   increaseCartQuantity: (id: string) => void;
   decreaseCartQuantity: (id: string) => void;
@@ -38,12 +37,12 @@ export function useShoppingCart() {
   return useContext(ShoppingCartContext);
 }
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-  const [Products, setProducts] = useState<any>([]);
+  const productsQuery = ProductsQuery();
   const [cartItems, setCartItems] = useState<any>({});
   const [token, setToken] = useState<any>("");
   const [searchParams, setSearchParams] = useSearchParams();
   const [user, setUser] = useState<any>();
-  const Category = searchParams.get("category");
+  const Category = searchParams.get("category") || "All";
   const q = searchParams.get("q")?.toLowerCase().trim(); //
 
   const loadCartData = async (token: any) => {
@@ -64,12 +63,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   }, [token]);
   //
 
-  useEffect(() => {
-    getProducts().then((result) => {
-      setProducts(result.items);
-    });
-  }, []);
-  //
   function getCartItemQuantity() {
     if (token) {
       let cart = 0;
@@ -126,7 +119,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     let totalamount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let iteminfo = Products?.find(
+        let iteminfo = productsQuery?.data?.items?.find(
           (product: Products) => product._id === item
         );
         totalamount += iteminfo?.price * cartItems[item];

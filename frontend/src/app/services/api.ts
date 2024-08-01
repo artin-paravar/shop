@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "https://shop-dz8e.onrender.com",
+  baseURL: "http://localhost:8000",
 });
 
 export async function getProducts() {
@@ -30,12 +30,7 @@ export async function searchandFilterItem(
   return data;
 }
 
-export async function categoryApi(
-  Category: string | null | undefined,
-  debounced: string | undefined
-) {
-  const { data } = await client(
-    `/api/shopitem/list?search=${debounced}&&category=${Category}`
-  );
+export async function categoryApi(Category: string | null | undefined) {
+  const { data } = await client(`/api/shopitem/list?category=${Category}`);
   return data;
 }

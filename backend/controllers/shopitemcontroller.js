@@ -37,6 +37,10 @@ const listitem = async (req, res) => {
 
     //search
     const title = new RegExp(search, "i");
+    const AllItems = await ShopItem.find({});
+    const AllItemsbyCategory = await ShopItem.find({
+      category,
+    });
     const items = await ShopItem.find({
       title: title,
     })
@@ -45,13 +49,13 @@ const listitem = async (req, res) => {
       .skip(page * limit)
       .limit(limit);
 
-    const categorymap = items.map((item) => {
+    const categorymap = AllItems.map((item) => {
       return item.category;
     });
 
-    const set = new Set(["All", ...categorymap]);
+    const set = new Set([...categorymap]);
     const itemcategory = [...set];
-    res.json({ items, itemcategory });
+    res.json({ items, itemcategory, AllItemsbyCategory });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "error" });

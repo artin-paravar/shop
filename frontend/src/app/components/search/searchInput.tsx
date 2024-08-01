@@ -34,7 +34,7 @@ export const Search = () => {
       <div
         className={
           open
-            ? " overflow-scroll fixed transition-all translate-y-0 bg-white w-full h-[100vh]  top-0 left-0 z-[999] sm:p-40 p-10"
+            ? " overflow-scroll fixed transition-all translate-y-0 bg-white w-full h-[100vh]  top-0 left-0 z-[999] sm:p-36 p-10"
             : " fixed bg-white w-full h-[100vh]  top-0 left-0 z-[999] p-40 translate-y-full transition-all"
         }
       >

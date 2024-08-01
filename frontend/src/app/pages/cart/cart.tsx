@@ -1,11 +1,10 @@
-import { useShoppingCart } from "../context/shop-context";
-
 import { Link } from "react-router-dom";
 import { CartItem } from "./cart-item";
 
-import { Products } from "../type/type";
-import { LoadingPage } from "../components/loading/loading";
-import { ProductsQuery } from "../services/queries";
+import { useShoppingCart } from "../../context/shop-context";
+import { Products } from "../../type/type";
+import { ProductsQuery } from "../../services/queries";
+import { LoadingPage } from "../../components/loading/loading";
 
 export default function Cart() {
   const Products = ProductsQuery();

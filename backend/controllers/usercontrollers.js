@@ -8,29 +8,32 @@ const loginUser = async (req, res) => {
   const { password, email } = req.body;
   try {
     if (!email) {
-      return res.json({ success: false, message: "please enter your email" });
+      return res.json({
+        success: false,
+        message: "لطفا ایمیل خود را وارد کنید",
+      });
     }
     if (!validator.isEmail(email)) {
       return res.json({
         success: false,
-        message: "please enter a valid email",
+        message: "لطفا یک ایمیل صحیح وارد کنید",
       });
     }
     if (!password) {
       return res.json({
         success: false,
-        message: "please enter your password",
+        message: "لطفا رمز خود را وارد کنید",
       });
     }
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.json({ success: false, message: "user dosent exists" });
+      return res.json({ success: false, message: "کاربر پیدا نشد" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.json({
         success: false,
-        message: "wrong email or password ",
+        message: "رمز عبور یا ایمیل اشتباه است ",
       });
     }
     const token = createToken(user._id, user);
@@ -52,36 +55,39 @@ const singupUser = async (req, res) => {
   try {
     const exists = await userModel.findOne({ email });
     if (exists) {
-      return res.json({ success: false, message: "user already exists" });
+      return res.json({ success: false, message: "کاربر از قبل ثبت شده" });
     }
     if (!fullname) {
       return res.json({
         success: false,
-        message: "please enter your fullname",
+        message: "لطفا اسم خود را وارد کنید",
       });
     }
     if (!email) {
-      return res.json({ success: false, message: "please enter your email" });
+      return res.json({
+        success: false,
+        message: "لطفا ایمیل خود را وارد کنید",
+      });
     }
     if (!validator.isEmail(email)) {
       return res.json({
         success: false,
-        message: "please enter a valid email",
+        message: "لطفا یک ایمیل صحیح وارد کنید",
       });
     }
     if (!password) {
       return res.json({
         success: false,
-        message: "please enter your password",
+        message: "لطفا رمز خود را وارد کنید",
       });
     }
 
     //validating
 
-    if (password.length < 6) {
+    if (password.length < 5) {
       return res.json({
         success: false,
-        message: "please enter a strong password",
+        message: "لطفا یک رمز قوی تر وارد کنید",
       });
     }
 

@@ -1,6 +1,7 @@
-import { useShoppingCart } from "../context/shop-context";
-import { LoadingPage } from "../components/loading/loading";
-import { ProductQuery } from "../services/queries";
+import { LoadingPage } from "../../components/loading/loading";
+import { useShoppingCart } from "../../context/shop-context";
+import { ProductQuery } from "../../services/queries";
+
 type CartItemProps = {
   id: any;
 };

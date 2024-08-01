@@ -19,7 +19,7 @@ function Login() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value.toString().toLocaleLowerCase(),
     });
   };
 
@@ -38,7 +38,7 @@ function Login() {
         navigate("/");
         setToken(data.token);
         setFormData({ email: "", password: "" });
-        toast.success("Login succesfull");
+        toast.success("ورود با موفقیت انجام شد");
         localStorage.setItem("token", data.token);
       }
     } catch (error) {
@@ -47,41 +47,47 @@ function Login() {
   };
 
   return (
-    <div className="h-[100vh] flex justify-center items-center">
+    <div className="h-[100vh] flex justify-center items-center ">
+      <div
+        className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+        aria-hidden="true"
+      >
+        <div className="relative left-1/2 -z-10 aspect-[1100/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ffbb00] to-[#ffffff] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"></div>
+      </div>
       <form
         onSubmit={handleSubmit}
-        className="max-w-[350px] w-full m-auto p-[20px]  rounded-[5px] shadow-md flex flex-col gap-4"
+        className=" max-w-[400px] w-full m-auto p-[25px] min-h-[400px] justify-between rounded-lg shadow-[2px_0px_20px_2px_lightgray] flex flex-col "
       >
-        <p className="text-center text-red-600">you have to login first</p>
-        <div className="flex flex-col items-start">
-          <label>Email </label>
+        <div className="flex flex-col gap-2 items-start">
+          <label>ادرس ایمیل</label>
           <input
             className="w-full p-[10px] border-state-300 border-[1px] rounded-[5px] outline-none text-[16px]"
             name="email"
             autoComplete="email"
-            placeholder=" your email"
+            placeholder=""
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col items-start">
-          <label>Password:</label>
+        <div className="flex flex-col gap-2 items-start">
+          <label>رمز عبور</label>
           <input
             className="w-full p-[10px] border-state-300 border-[1px]  outline-none rounded-[5px] text-[16px]"
             type="password"
             autoComplete="new-password"
             name="password"
-            placeholder="your password"
+            placeholder=""
             onChange={handleChange}
           />
         </div>
         <button
-          className=" rounded-[5px] bg-[#3498db] text-[#fff] p-[10px_15px] border-[none] rounded[5px] text-[16px] cursor-pointer transition-all duration-300"
+          className=" rounded-[5px] bg-orange-400 text-white p-[10px_15px] border-[none] rounded[5px] text-[16px] cursor-pointer transition-all duration-300"
           type="submit"
         >
-          Submit
+          ورود
         </button>
-        <Link className="text-[#3498db] text-center text-[18px]" to={"/signup"}>
-          Dont have an account yet?
+        <Link className=" text-center text-[18px]" to={"/signup"}>
+          عضو نیستید؟{" "}
+          <span className="border-b border-gray-600 pb-1 ">ثبت نام</span>
         </Link>
       </form>
     </div>

@@ -8,7 +8,7 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { FreeMode } from "swiper/modules";
 
 import { SkeletonPage } from "../loading/skeleton";
-import { Product } from "../../shop/product";
+import { Product } from "../product/product";
 
 function SliderMoshabeh({ data, title }: Products) {
   const slider = useRef<any>(null);

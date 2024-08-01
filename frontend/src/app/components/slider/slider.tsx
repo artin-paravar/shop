@@ -8,7 +8,7 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { FreeMode } from "swiper/modules";
 
 import { SkeletonPage } from "../loading/skeleton";
-import { Product } from "../../shop/product";
+import { Product } from "../product/product";
 import { Link } from "react-router-dom";
 
 function SliderItem({ data, title }: Products) {

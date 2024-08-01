@@ -17,7 +17,7 @@ export const CommentSection = () => {
           name=""
           id=""
         ></textarea>
-        <div className="w-full gap-4 flex">
+        <div className="w-full gap-4 sm:flex-row flex-col flex">
           <input
             placeholder="نام*"
             type="text"

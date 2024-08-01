@@ -1,4 +1,6 @@
 export const Contact = () => {
+  document.title = "تماس با ما";
+
   return (
     <div className="isolate m-auto mt-16 max-w-[1000px] bg-white px-6 py-24 sm:py-32 lg:px-8">
       <div

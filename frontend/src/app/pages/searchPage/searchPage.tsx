@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Product } from "../../shop/product";
+import { Product } from "../../components/product/product";
 import { useDebounce } from "../../components/debounce/usedebounce";
 import { searchProductQuery } from "../../services/queries";
 import { useShoppingCart } from "../../context/shop-context";
@@ -24,12 +24,6 @@ export const SearchPage = ({ setopen }: OPEN | any) => {
       searchitem.fetchNextPage();
     }
   }, [inView, searchitem.hasNextPage, searchitem.fetchNextPage]);
-  //
-  // useEffect(() => {
-  //   if (!open) {
-  //     navigate("/");
-  //   }
-  // }, [open]);
 
   if (searchitem.isLoading)
     return (
@@ -53,7 +47,7 @@ export const SearchPage = ({ setopen }: OPEN | any) => {
     <>
       <div className="flex">
         <div className="w-full sm:p-0 p-4 ">
-          <div className="grid xl:grid-cols-4 lg:grid-cols-3 p-5 md:grid-cols-2 sm:grid-cols-1 justify-end items-end gap-7">
+          <div className="grid xl:grid-cols-4 lg:grid-cols-3 pt-3 md:grid-cols-2 sm:grid-cols-1 justify-end items-end gap-7">
             {searchitem?.data?.pages?.map((item) =>
               item?.items?.map(
                 ({ category, _id, price, title, image, description }: any) => {
@@ -63,15 +57,17 @@ export const SearchPage = ({ setopen }: OPEN | any) => {
                       className="cursor-pointer"
                       onClick={() => handelnavigate(_id)}
                     >
-                      <Product
-                        id={_id}
-                        price={price}
-                        description={description}
-                        SS
-                        title={title}
-                        image={image}
-                        category={category}
-                      />
+                      <div className="md:border-l border-b p-2 rounded-lg">
+                        <Product
+                          id={_id}
+                          price={price}
+                          description={description}
+                          SS
+                          title={title}
+                          image={image}
+                          category={category}
+                        />
+                      </div>
                     </div>
                   );
                 }

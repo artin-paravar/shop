@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../context/shop-context";
 
 type Props = {
   itemId: string | any;
 };
 export const Buttons = ({ itemId }: Props) => {
-  const { increaseCartQuantity, decreaseCartQuantity, cartItems } =
+  const { increaseCartQuantity, decreaseCartQuantity, token, cartItems } =
     useShoppingCart();
+  const navigate = useNavigate();
   return (
     <div className="flex  items-center  gap-2 ">
       {cartItems[itemId] ? (
@@ -27,7 +29,9 @@ export const Buttons = ({ itemId }: Props) => {
       ) : (
         <div>
           <button
-            onClick={() => increaseCartQuantity(itemId)}
+            onClick={() =>
+              token ? increaseCartQuantity(itemId) : navigate("/login")
+            }
             className="animate-bounce duration-75 transition-all hover:bg-black p-[7px_15px] m-1 bg-orange-400 text-white rounded-lg border-solid border"
           >
             افزودن به سبد خرید{" "}

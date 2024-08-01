@@ -60,12 +60,9 @@ export function searchProductQuery(debounced: string | undefined) {
     },
   });
 }
-export function categoryitem(
-  Category: string | null | undefined,
-  debounced: string | undefined
-) {
+export function categoryitem(Category: string | null | undefined) {
   return useQuery({
-    queryKey: ["category", { Category, debounced }],
-    queryFn: () => categoryApi(Category, debounced),
+    queryKey: ["category", { Category }],
+    queryFn: () => categoryApi(Category),
   });
 }

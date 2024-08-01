@@ -19,13 +19,14 @@ export default function Signup() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value.toString().toLocaleLowerCase(),
     });
     //
   };
   ////////
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     const { fullname, email, password } = formData;
     try {
       const { data } = await axios.post(`${localhost}/api/user/signup`, {
@@ -36,9 +37,10 @@ export default function Signup() {
       if (!data.success) {
         toast.error(data.message);
       } else {
+        localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/");
         setToken(data.token);
-        toast.success("signup succesfull");
+        toast.success("ثبت نام با موفقیت انجام شد");
         setFormData({ email: "", password: "", fullname: "" });
         localStorage.setItem("token", data.token);
       }
@@ -49,35 +51,41 @@ export default function Signup() {
 
   return (
     <div className="h-[100vh] flex justify-center items-center">
-      <form className="max-w-[350px] w-full  m-auto p-[20px]  rounded-[5px] shadow-md flex flex-col gap-4">
-        <div className="flex flex-col items-start">
-          <label>full name:</label>
+      <div
+        className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+        aria-hidden="true"
+      >
+        <div className="relative left-1/2 -z-10 aspect-[1150/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ffbb00] to-[#ffffff] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"></div>
+      </div>
+      <form className=" max-w-[400px] w-full justify-between  m-auto p-[25px] min-h-[450px]  rounded-lg shadow-[2px_0px_20px_2px_lightgray] flex flex-col ">
+        <div className="flex  gap-2 flex-col items-start">
+          <label>نام شما</label>
           <input
-            className="w-full p-[10px] border-state-300 border-[1px] rounded-[5px] text-[16px]"
+            className="w-full outline-none  p-[10px] border-state-300 border-[1px] rounded-[5px] text-[16px]"
             name="fullname"
-            placeholder=" your name"
+            placeholder=""
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col items-start">
-          <label>Email :</label>
+        <div className="flex gap-2  flex-col items-start">
+          <label>ادرس ایمیل</label>
           <input
-            className="w-full p-[10px] border-state-300 border-[1px] rounded-[5px] text-[16px]"
+            className="w-full outline-none  p-[10px] border-state-300 border-[1px] rounded-[5px] text-[16px]"
             name="email"
-            placeholder=" your email"
+            placeholder=""
             autoComplete="email"
             onChange={handleChange}
           />
         </div>
 
-        <div className="flex flex-col items-start">
-          <label>Password:</label>
+        <div className="flex  gap-2 flex-col items-start">
+          <label>رمز عبور</label>
           <input
-            className="w-full p-[10px] border-state-300 border-[1px]  outline-none rounded-[5px] text-[16px]"
+            className="w-full   p-[10px] border-state-300 border-[1px]  outline-none rounded-[5px] text-[16px]"
             type="password"
             autoComplete="new-password"
             name="password"
-            placeholder="your password"
+            placeholder=""
             onChange={handleChange}
           />
         </div>
@@ -85,13 +93,14 @@ export default function Signup() {
         <button
           onClick={handleSubmit}
           type="submit"
-          className=" rounded-[5px] bg-[#3498db] text-[#fff] p-[10px_15px] border-[none] rounded[5px] text-[16px] cursor-pointer transition-all duration-300"
+          className=" rounded-[5px]  bg-orange-400 text-[#fff] p-[10px_15px] border-[none] rounded[5px] text-[16px] cursor-pointer transition-all duration-300"
         >
-          Submit
+          ثبت نام
         </button>
 
-        <Link className="text-[#3498db] text-center text-[18px]" to={"/login"}>
-          login
+        <Link className=" text-center text-[18px]" to={"/login"}>
+          قبلا عضو شده اید؟{" "}
+          <span className="border-b border-gray-600 pb-1 ">ورود</span>
         </Link>
       </form>
     </div>

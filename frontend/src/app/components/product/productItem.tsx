@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
-import { Buttons } from "../components/buttons/buttons";
+import { Buttons } from "../buttons/buttons";
 import { IoIosArrowBack } from "react-icons/io";
-import { LoadingPage } from "../components/loading/loading";
-import { useShoppingCart } from "../context/shop-context";
-import { ProductQuery } from "../services/queries";
+import { LoadingPage } from "../loading/loading";
+import { useShoppingCart } from "../../context/shop-context";
+import { ProductQuery } from "../../services/queries";
 import { useState } from "react";
-import { CommentSection } from "../components/commentSection.tsx/Comment";
-import { FilterApi } from "../filteritem";
-import SliderMoshabeh from "../components/slider/sliderMoshabeh";
+import { CommentSection } from "../commentSection.tsx/Comment";
+import { FilterApi } from "../../filteritem";
+import SliderMoshabeh from "../slider/sliderMoshabeh";
 
 export default function ProductItem() {
   const { id } = useParams<{ id: string | undefined }>();

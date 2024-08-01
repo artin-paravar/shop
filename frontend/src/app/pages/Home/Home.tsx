@@ -1,11 +1,11 @@
-import BannerSlider from "../components/slider/sliderBanner";
-import { CategoryUI } from "../components/CategoryUI/CategoryUI";
-import SliderItem from "../components/slider/slider";
-import { FilterApi } from "../filteritem";
-import { Porforosh } from "../components/Porforosh/Porforosh";
-import { Zemanat } from "../components/zemanat/zemanat";
+import BannerSlider from "../../components/slider/sliderBanner";
+import { CategoryUI } from "../../components/CategoryUI/CategoryUI";
+import SliderItem from "../../components/slider/slider";
+import { FilterApi } from "../../filteritem";
+import { Porforosh } from "../../components/Porforosh/Porforosh";
+import { Zemanat } from "../../components/zemanat/zemanat";
 
-export function Shop() {
+export function Home() {
   const { phoneCategory, consoleCategory, randomItem } = FilterApi();
   document.title = "فروشگاه";
   return (
