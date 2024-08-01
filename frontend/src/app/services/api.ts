@@ -30,7 +30,12 @@ export async function searchandFilterItem(
   return data;
 }
 
-export async function categoryApi(Category: string | null | undefined) {
-  const { data } = await client(`/api/shopitem/list?category=${Category}`);
+export async function categoryApi(
+  { pageParam }: { pageParam: any },
+  Category: string | null | undefined
+) {
+  const { data } = await client(
+    `/api/shopitem/list?page=${pageParam}&limit=6&&category=${Category}`
+  );
   return data;
 }

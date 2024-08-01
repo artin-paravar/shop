@@ -13,6 +13,7 @@ const Additem = ({ host }: Host) => {
     category: "موبایل",
   });
   //
+
   const onChangeHandler = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -24,6 +25,24 @@ const Additem = ({ host }: Host) => {
   };
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (data.category === "") {
+      toast.error("دسته بندی را وارد کنید");
+      return null;
+    }
+    if (data.title === "") {
+      toast.error("نام محصول را وارد کنید");
+      return null;
+    }
+
+    if (data.price === "") {
+      toast.error("قیمت را وارد کنید");
+      return null;
+    }
+    if (data.description === "") {
+      toast.error("توضیح را وارد کنید");
+      return null;
+    }
+
     const { title, description, category, price } = data;
     const formData: any = new FormData();
     formData.append("title", title);
@@ -47,12 +66,12 @@ const Additem = ({ host }: Host) => {
     <div className="h-[100vh] flex items-center justify-center">
       <form
         onSubmit={onSubmitHandler}
-        className="flex flex-col w-[400px] m-auto gap-3 p-4 bg-black"
+        className="flex flex-col w-[400px] m-auto gap-3 p-4 shadow-2xl"
       >
-        <p>upload image</p>
+        <p>اپلود عکس</p>
         <label htmlFor="image">
           <img
-            className="w-full  m-auto h-[250px] object-cover"
+            className="w-full border-black border rounded-md m-auto h-[250px] object-fill"
             src={
               image
                 ? URL.createObjectURL(image)
@@ -63,32 +82,34 @@ const Additem = ({ host }: Host) => {
         </label>
         <input
           type="file"
-          required
           hidden
           id="image"
           onChange={(e: any) => setimage(e.target.files[0])}
         />
-        <p>product title</p>
+        <p>نام محصول</p>
         <input
+          className=" border border-black rounded-md p-2"
           type="text"
-          required
           name="title"
           value={data.title}
           onChange={onChangeHandler}
-          placeholder="title"
         />
         <p>product description</p>
 
         <textarea
           placeholder="description"
+          className=" border border-black rounded-md p-2"
           name="description"
-          required
           rows={6}
           onChange={onChangeHandler}
           value={data.description}
         />
         <p>product category</p>
-        <select name="category" required onChange={onChangeHandler}>
+        <select
+          className=" border border-black rounded-md p-2"
+          name="category"
+          onChange={onChangeHandler}
+        >
           <option value="موبایل">موبایل</option>
           <option value="ساعت هوشمند">ساعت هوشمند</option>
           <option value="اسپیکر">اسپیکر</option>
@@ -97,14 +118,14 @@ const Additem = ({ host }: Host) => {
         <p>product price</p>
         <input
           onChange={onChangeHandler}
+          className=" border border-black rounded-md p-2"
           value={data.price}
           type="number"
           name="price"
-          required
           placeholder="$20"
         />
-        <button type="submit" className="text-white">
-          ADD
+        <button type="submit" className="text-white bg-black p-4">
+          اضافه کردن ایتم
         </button>
       </form>
     </div>

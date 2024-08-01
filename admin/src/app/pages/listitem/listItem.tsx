@@ -31,37 +31,44 @@ export const ListItem = ({ host }: Host) => {
   }, []);
   return (
     <div>
-      {list.length > 0 ? <p>All item</p> : <p>there is no item</p>}
-      {list.map((item: any) => {
-        return (
-          <>
-            <div
-              className="flex bg-black text-white p-4
+      {list.length > 0 ? <p>همه ایتم ها</p> : <p>ایتمی وجود ندارد</p>}
+      <div className="flex-col-reverse flex ">
+        {list.map((item: any) => {
+          return (
+            <>
+              <div
+                className="flex bg-black text-white p-4
             "
-            >
-              <div className="flex  h-[200px] gap-5 ">
-                <img
-                  className="w-[200px]  object-contain"
-                  src={`${host}/images/` + item.image}
-                  alt=""
-                />
-                <div className="flex flex-col gap-5 w-full">
-                  <p>${item.price}</p>
-                  <p>title : {item.title}</p>
-                  <p>category:{item.category}</p>
-                  <b
-                    className="cursor-pointer"
-                    onClick={() => removefood(item._id)}
-                  >
-                    delete item
-                  </b>
+              >
+                <div className="flex  h-[200px] gap-5 ">
+                  <img
+                    className="w-[200px]  object-contain"
+                    src={`${host}/images/` + item.image}
+                    alt=""
+                  />
+                  <div className="flex flex-col gap-5 w-full">
+                    <p>
+                      قیمت{" "}
+                      {item.price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </p>
+                    <p>نام محصول : {item.title}</p>
+                    <p>دسته بندی:{item.category}</p>
+                    <b
+                      className="cursor-pointer"
+                      onClick={() => removefood(item._id)}
+                    >
+                      delete item
+                    </b>
+                  </div>
                 </div>
               </div>
-            </div>
-            <hr className="m-6" />
-          </>
-        );
-      })}
+              <hr className="m-6" />
+            </>
+          );
+        })}
+      </div>
     </div>
   );
 };

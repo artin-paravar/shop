@@ -129,7 +129,7 @@ export const Contact = () => {
               </p>
             </div>{" "}
             <div className="flex flex-col gap-1 ">
-              4<span className="text-[18px]">فروشگاه تهران</span>
+              <span className="text-[18px]">فروشگاه تهران</span>
               <p className="text-gray-500 text-sm">
                 ایران، استان تهران، تهران، خیابان آزادی، آزادی 1
                 <br />

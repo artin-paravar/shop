@@ -1,10 +1,9 @@
-import { set } from "mongoose";
 import ShopItem from "../models/shopitem.js";
 import fs from "fs";
 
 //add shop item
 const addshopitem = async (req, res) => {
-  let image_filename = `${req.file.filename}`;
+  let image_filename = req.file.filename;
   const item = new ShopItem({
     title: req.body.title,
     description: req.body.description,
@@ -38,9 +37,7 @@ const listitem = async (req, res) => {
     //search
     const title = new RegExp(search, "i");
     const AllItems = await ShopItem.find({});
-    const AllItemsbyCategory = await ShopItem.find({
-      category,
-    });
+
     const items = await ShopItem.find({
       title: title,
     })
@@ -55,7 +52,7 @@ const listitem = async (req, res) => {
 
     const set = new Set([...categorymap]);
     const itemcategory = [...set];
-    res.json({ items, itemcategory, AllItemsbyCategory });
+    res.json({ items, itemcategory });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "error" });

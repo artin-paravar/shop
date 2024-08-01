@@ -15,15 +15,20 @@ export const Assests = () => {
       id: 1,
       image: categoryimg1,
       text: "کنسول های بازی",
-      link: "/playstation",
+      link: "shop?category=%DA%A9%D9%86%D8%B3%D9%88%D9%84+%D8%A8%D8%A7%D8%B2%DB%8C",
     },
     {
       id: 2,
       image: categoryimg2,
       text: "موبایل",
-      link: "/phone",
+      link: "shop?category=%D9%85%D9%88%D8%A8%D8%A7%DB%8C%D9%84",
     },
-    { id: 3, image: categoryimg3, text: "اسپیکر", link: "/speakers " },
+    {
+      id: 3,
+      image: categoryimg3,
+      text: "اسپیکر",
+      link: "shop?category=%D8%A7%D8%B3%D9%BE%DB%8C%DA%A9%D8%B1",
+    },
   ];
   const item1footer: footer[] = [
     { id: 1, text: "دسترسی سریع" },

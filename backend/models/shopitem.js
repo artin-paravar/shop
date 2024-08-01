@@ -4,7 +4,7 @@ const ShopSchema = mongoose.Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true },
   category: { type: String },
-  image: { type: String, required: true },
+  image: { type: [], required: true },
 });
 const ShopItem =
   mongoose.models.shopitem || mongoose.model("shopitems", ShopSchema);
