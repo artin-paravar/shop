@@ -6,7 +6,8 @@ import { useShoppingCart } from "../context/shop-context";
 import { ProductQuery } from "../services/queries";
 import { useState } from "react";
 import { CommentSection } from "../components/commentSection.tsx/Comment";
-// import { FilterApi } from "../filteritem";
+import { FilterApi } from "../filteritem";
+import SliderItem from "../components/slider/slider";
 // import SliderMoshabeh from "../components/slider/sliderMoshabeh";
 
 export default function ProductItem() {
@@ -15,9 +16,9 @@ export default function ProductItem() {
   const [choose, SetChoose] = useState("tozih");
   const [Moshahede, SetMoshahede] = useState(false);
 
-  const Product = ProductQuery(id as any);
+  const Product = ProductQuery(id as string);
   //
-  // const { MahsolatMortabat } = FilterApi();
+  const { MahsolatMortabat } = FilterApi();
 
   if (document.title === "undefined") {
     document.title = "loading";
@@ -109,7 +110,7 @@ export default function ProductItem() {
       {/*  */}
       <div className="m-[40px_auto] max-w-[900px] md:p-0 p-5">
         <div className="flex flex-col">
-          {/* <SliderMoshabeh data={MahsolatMortabat} title="محصولات مرتبط" /> */}
+          <SliderItem data={MahsolatMortabat} title="محصولات مرتبط" />
         </div>
       </div>
     </>

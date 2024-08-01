@@ -17,11 +17,11 @@ export const FilterApi = () => {
   const randomItem = productsQuery?.data?.items?.filter((item: Products) => {
     return [item][0]._id.includes("5");
   });
-  // const MahsolatMortabat = productsQuery?.data?.items?.filter(
-  //   (item: Products) => {
-  //     return [item][0]._id.includes("5");
-  //   }
-  // );
+  const MahsolatMortabat = productsQuery?.data?.items?.filter(
+    (item: Products) => {
+      return [item][0]._id.includes("5");
+    }
+  );
 
-  return { phoneCategory, consoleCategory, randomItem };
+  return { phoneCategory, consoleCategory, randomItem, MahsolatMortabat };
 };
