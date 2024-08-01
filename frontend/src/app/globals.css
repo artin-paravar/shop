@@ -3,16 +3,15 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: iransans;
-  src: url("fonts/IRANSansXFaNum-Medium.woff") format("woff");
-  src: url("fonts/IRANSansXFaNum-Medium.woff2") format("woff2");
+  font-family: "iransans";
+  src: local("IRANSansXFaNum-Medium"),
+    url("./assets/fonts/IRANSansXFaNum-Medium.woff") format("truetype");
 }
 
 * {
   scroll-behavior: smooth;
 }
 body {
-  font-family: iransans;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
