@@ -7,8 +7,7 @@ import { ProductQuery } from "../services/queries";
 import { useState } from "react";
 import { CommentSection } from "../components/commentSection.tsx/Comment";
 import { FilterApi } from "../filteritem";
-import SliderItem from "../components/slider/slider";
-// import SliderMoshabeh from "../components/slider/sliderMoshabeh";
+import SliderMoshabeh from "../components/slider/sliderMoshabeh";
 
 export default function ProductItem() {
   const { id } = useParams<{ id: string | undefined }>();
@@ -110,7 +109,10 @@ export default function ProductItem() {
       {/*  */}
       <div className="m-[40px_auto] max-w-[900px] md:p-0 p-5">
         <div className="flex flex-col">
-          <SliderItem data={MahsolatMortabat} title="محصولات مرتبط" />
+          <SliderMoshabeh
+            data={MahsolatMortabat(Product?.data?.item?.category, id)}
+            title="محصولات مرتبط"
+          />
         </div>
       </div>
     </>
