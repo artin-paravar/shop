@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useShoppingCart } from "../../context/shop-context";
 import { categoryitem, ProductsQuery } from "../../services/queries";
 import { Products } from "../../type/type";
