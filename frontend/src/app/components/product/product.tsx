@@ -1,12 +1,10 @@
-import { useShoppingCart } from "../../context/shop-context";
 import { Products } from "../../type/type";
-export const Product = ({ title, price, image }: Products) => {
-  const { localhost } = useShoppingCart();
+export const Product = ({ title, price, productImage }: Products) => {
   return (
     <div className="outline-none   hover:scale-105 transition-all  p-2 overflow-hidden ">
       <img
         className="w-full h-[400px] object-contain "
-        src={`${localhost}/images/` + image}
+        src={productImage}
         alt=""
       />
 

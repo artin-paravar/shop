@@ -3,20 +3,22 @@ import fs from "fs";
 
 //add shop item
 const addshopitem = async (req, res) => {
-  let image_filename = req.file.filename;
-  const item = new ShopItem({
-    title: req.body.title,
-    description: req.body.description,
-    price: Number(req.body.price),
-    category: req.body.category,
-    image: image_filename,
-  });
   try {
-    await item.save();
-    res.json({ success: true, message: "item added" });
-  } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "error" });
+    const uploadProduct = new ShopItem(req.body);
+    const saveProduct = await uploadProduct.save();
+
+    res.status(201).json({
+      message: "Product upload successfully",
+      error: false,
+      success: true,
+      data: saveProduct,
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: err.message || err,
+      error: true,
+      success: false,
+    });
   }
 };
 

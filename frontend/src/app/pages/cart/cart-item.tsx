@@ -19,9 +19,9 @@ export const CartItem = ({ id }: CartItemProps) => {
           src={`${localhost}/images/` + Products?.data?.item?.image}
           alt="/"
         />
-        <div className=" gap-3 p-3 text-[30px]">
-          <div className=" flex gap-5  items-center justify-between">
-            <div className="max-w-[400px] items-start gap-2 flex flex-col">
+        <div className=" gap-3 p-3 text-[30px] w-full">
+          <div className=" flex gap-5  flex-col md:flex-row  items-center justify-between">
+            <div className="max-w-[300px] items-center md:items-start gap-2 flex flex-col">
               <p className="line-clamp-2  text-[15px]">
                 {Products?.data?.item?.title}
               </p>

@@ -10,6 +10,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { ProductsQuery } from "../services/queries";
 const localhost = "https://shop-dz8e.onrender.com";
+// https://shop-dz8e.onrender.com
 type ShoppingCartProviderProps = {
   children: ReactNode;
 };

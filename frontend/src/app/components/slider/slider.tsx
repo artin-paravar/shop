@@ -42,6 +42,7 @@ function SliderItem({ data, title }: Products) {
       >
         {data ? (
           data?.map((items: Products) => {
+            console.log(items.productImage[0]);
             return (
               <SwiperSlide
                 className="border-l border-l-gray-200"
@@ -49,7 +50,7 @@ function SliderItem({ data, title }: Products) {
               >
                 <Link to={`product/${items._id}`}>
                   <Product
-                    image={items.image}
+                    productImage={items.productImage[0]}
                     price={items.price}
                     title={items.title}
                   />

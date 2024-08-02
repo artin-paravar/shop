@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useRef } from "react";
-
+import { Autoplay } from "swiper/modules";
 import { Assests } from "../../assets/assets";
 import { IMG } from "../../type/type";
 function BannerSlider() {
@@ -12,10 +12,12 @@ function BannerSlider() {
 
   return (
     <Swiper
+      modules={[Autoplay]}
       style={{ height: "450px" }}
       onSwiper={(it) => (slider.current = it)}
       slidesPerView={1}
       loop={true}
+      autoplay={{ delay: 3000 }}
       navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
     >
       {banner?.map((item: IMG) => {

@@ -35,18 +35,21 @@ export const ListItem = ({ host }: Host) => {
       <div className="flex-col-reverse flex ">
         {list.map((item: any) => {
           return (
-            <>
+            <div key={item._id}>
               <div
                 className="flex bg-black text-white p-4
             "
               >
-                <div className="flex  h-[200px] gap-5 ">
-                  <img
-                    className="w-[200px]  object-contain"
-                    src={`${host}/images/` + item.image}
-                    alt=""
-                  />
-                  <div className="flex flex-col gap-5 w-full">
+                <div className="flex max-h-[300px]  gap-5 ">
+                  {item?.productImage?.map((item: any) => {
+                    return (
+                      <div key={item} className="">
+                        <img className=" w-full h-full" src={item} alt="" />
+                      </div>
+                    );
+                  })}
+
+                  <div className="flex flex-col gap-5 ">
                     <p>
                       قیمت{" "}
                       {item.price
@@ -65,7 +68,7 @@ export const ListItem = ({ host }: Host) => {
                 </div>
               </div>
               <hr className="m-6" />
-            </>
+            </div>
           );
         })}
       </div>

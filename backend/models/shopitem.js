@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 const ShopSchema = mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  price: { type: Number, required: true },
-  category: { type: String },
-  image: { type: [], required: true },
+  title: String,
+  description: String,
+  price: String,
+  category: String,
+  productImage: [],
 });
 const ShopItem =
   mongoose.models.shopitem || mongoose.model("shopitems", ShopSchema);
