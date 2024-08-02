@@ -53,7 +53,7 @@ function SliderMoshabeh({ data, title }: Products) {
                   onClick={() => handelNavigate(items?._id)}
                 >
                   <Product
-                    image={items.image}
+                    productImage={items.productImage}
                     price={items.price}
                     title={items.title}
                   />

@@ -13,7 +13,7 @@ export const Porforosh = ({ data, title }: Products) => {
             return (
               <Link key={items._id} to={`product/${items._id}`}>
                 <PorforoshItem
-                  image={items.image}
+                  productImage={items.productImage}
                   price={items.price}
                   title={items.title}
                   id={items._id}

@@ -13,9 +13,8 @@ import { Link } from "react-router-dom";
 
 function SliderItem({ data, title }: Products) {
   const slider = useRef<any>(null);
-
   return (
-    <div className=" w-full bg-white  rounded-2xl p-3 shadow-[2px_0px_20px_2px_lightgray]">
+    <div className=" w-full  bg-white  rounded-2xl p-3 shadow-[2px_0px_20px_2px_lightgray]">
       <h1 className="text-center sm:text-[28px] text-[20px] m-[10px_0]">
         {title}
       </h1>
@@ -42,7 +41,6 @@ function SliderItem({ data, title }: Products) {
       >
         {data ? (
           data?.map((items: Products) => {
-            console.log(items.productImage[0]);
             return (
               <SwiperSlide
                 className="border-l border-l-gray-200"
@@ -50,7 +48,7 @@ function SliderItem({ data, title }: Products) {
               >
                 <Link to={`product/${items._id}`}>
                   <Product
-                    productImage={items.productImage[0]}
+                    productImage={items.productImage}
                     price={items.price}
                     title={items.title}
                   />

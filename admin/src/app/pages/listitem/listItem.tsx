@@ -32,7 +32,7 @@ export const ListItem = ({ host }: Host) => {
   return (
     <div>
       {list.length > 0 ? <p>همه ایتم ها</p> : <p>ایتمی وجود ندارد</p>}
-      <div className="flex-col-reverse flex ">
+      <div className="flex-col-reverse flex w-full">
         {list.map((item: any) => {
           return (
             <div key={item._id}>
@@ -40,16 +40,16 @@ export const ListItem = ({ host }: Host) => {
                 className="flex bg-black text-white p-4
             "
               >
-                <div className="flex max-h-[300px]  gap-5 ">
+                <div className="flex  flex-wrap  lg:m-0  gap-5 ">
                   {item?.productImage?.map((item: any) => {
                     return (
-                      <div key={item} className="">
+                      <div key={item} className="max-w-[300px] ">
                         <img className=" w-full h-full" src={item} alt="" />
                       </div>
                     );
                   })}
 
-                  <div className="flex flex-col gap-5 ">
+                  <div className="flex flex-col gap-5  ">
                     <p>
                       قیمت{" "}
                       {item.price
@@ -58,16 +58,17 @@ export const ListItem = ({ host }: Host) => {
                     </p>
                     <p>نام محصول : {item.title}</p>
                     <p>دسته بندی:{item.category}</p>
+                    <p>برند:{item.brand}</p>
                     <b
                       className="cursor-pointer"
                       onClick={() => removefood(item._id)}
                     >
-                      delete item
+                      حذف ایتم
                     </b>
                   </div>
                 </div>
               </div>
-              <hr className="m-6" />
+              <hr className="m-6 bg-black border border-black h-2" />
             </div>
           );
         })}

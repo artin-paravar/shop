@@ -30,11 +30,15 @@ export const ResultProduct = () => {
           {Category !== "All"
             ? itemCategory?.data?.pages?.map((item: Products) => {
                 return item?.items?.map(
-                  ({ _id, image, price, title }: Products) => {
+                  ({ _id, productImage, price, title }: Products) => {
                     return (
                       <div key={_id} className="shadow-md rounded-2xl ">
                         <a target="_blank" key={_id} href={`product/${_id}`}>
-                          <Product image={image} price={price} title={title} />
+                          <Product
+                            productImage={productImage}
+                            price={price}
+                            title={title}
+                          />
                         </a>
                       </div>
                     );
@@ -43,11 +47,15 @@ export const ResultProduct = () => {
               })
             : itemCategory?.data?.pages?.map((item: Products) => {
                 return item?.items?.map(
-                  ({ _id, image, price, title }: Products) => {
+                  ({ _id, productImage, price, title }: Products) => {
                     return (
                       <div key={_id} className="shadow-md rounded-2xl ">
                         <a target="_blank" key={_id} href={`product/${_id}`}>
-                          <Product image={image} price={price} title={title} />
+                          <Product
+                            productImage={productImage}
+                            price={price}
+                            title={title}
+                          />
                         </a>
                       </div>
                     );

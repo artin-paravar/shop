@@ -3,8 +3,9 @@ const ShopSchema = mongoose.Schema({
   title: String,
   description: String,
   price: String,
-  category: String,
   productImage: [],
+  category: String,
+  brand: String,
 });
 const ShopItem =
   mongoose.models.shopitem || mongoose.model("shopitems", ShopSchema);

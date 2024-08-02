@@ -14,8 +14,10 @@ const Additem = ({ host }: Host) => {
     price: "",
     productImage: [],
     category: "موبایل",
+    brand: "",
   });
   //
+  console.log(data);
   const onChangeHandler = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -86,7 +88,9 @@ const Additem = ({ host }: Host) => {
         description: "",
         price: "",
         category: "",
+        brand: "",
       });
+      window.location.reload();
       toast.success(res.data.message);
     } else {
       console.log("error");
@@ -146,17 +150,16 @@ const Additem = ({ host }: Host) => {
           value={data.title}
           onChange={onChangeHandler}
         />
-        <p>product description</p>
+        <p>توضیحات محصول</p>
 
         <textarea
-          placeholder="description"
           className=" border border-black rounded-md p-2"
           name="description"
           rows={6}
           onChange={onChangeHandler}
           value={data.description}
         />
-        <p>product category</p>
+        <p>دسته بندی </p>
         <select
           className=" border border-black rounded-md p-2"
           name="category"
@@ -167,14 +170,22 @@ const Additem = ({ host }: Host) => {
           <option value="اسپیکر">اسپیکر</option>
           <option value="کنسول بازی">کنسول بازی</option>
         </select>
-        <p>product price</p>
+        <p>برند</p>
+        <input
+          className=" border border-black rounded-md p-2"
+          type="text"
+          name="brand"
+          value={data.brand}
+          onChange={onChangeHandler}
+        />
+
+        <p>قیمت</p>
         <input
           onChange={onChangeHandler}
           className=" border border-black rounded-md p-2"
           value={data.price}
           type="number"
           name="price"
-          placeholder="$20"
         />
         <button type="submit" className="text-white bg-black p-4">
           اضافه کردن ایتم

@@ -2,16 +2,15 @@ import { useParams } from "react-router-dom";
 import { Buttons } from "../buttons/buttons";
 import { IoIosArrowBack } from "react-icons/io";
 import { LoadingPage } from "../loading/loading";
-import { useShoppingCart } from "../../context/shop-context";
 import { ProductQuery } from "../../services/queries";
 import { useState } from "react";
 import { CommentSection } from "../commentSection.tsx/Comment";
 import { FilterApi } from "../../filteritem";
 import SliderMoshabeh from "../slider/sliderMoshabeh";
+import SliderThumbs from "../slider/sliderTumbs";
 
 export default function ProductItem() {
   const { id } = useParams<{ id: string | undefined }>();
-  const { localhost } = useShoppingCart();
   const [choose, SetChoose] = useState("tozih");
   const [Moshahede, SetMoshahede] = useState(false);
 
@@ -28,16 +27,13 @@ export default function ProductItem() {
 
   return (
     <>
-      <div className="  xl:container xl:m-auto p-[50px_10px] h-full flex items-center justify-center flex-col gap-3">
-        <div className="flex md:flex-row  flex-col justify-center gap-2 ">
-          <img
-            src={`${localhost}/images/` + Product?.data?.item?.image}
-            alt="/"
-            className="max-w-[500px] max-h-[500px] object-contain w-full"
-          />
+      <div className="  xl:container xl:m-auto p-[50px_10px] h-full flex items-center justify-center flex-col gap-8">
+        <div className="flex lg:flex-row  flex-col justify-center lg:gap-2 gap-10">
+          <SliderThumbs data={Product?.data?.item} />
+
           <div className="mt-5 gap-7 sm:text-[20px] text-[17px] flex flex-col  max-w-[800px]  p-[0_30px] sm:p-[0_20px]">
             {/*  */}
-            <h1 className="flex text-2xl  items-start gap-2 flex-col lg:flex-row">
+            <h1 className="flex text-2xl  text-justify items-start gap-2 flex-col lg:flex-row">
               {Product?.data?.item?.title}
             </h1>
             {/*  */}
@@ -58,6 +54,8 @@ export default function ProductItem() {
             </h3>
 
             <h3>دسته بندی : {Product?.data?.item?.category}</h3>
+
+            <h3>برند : {Product?.data?.item?.brand}</h3>
             <Buttons itemId={id} />
           </div>
         </div>
@@ -88,7 +86,7 @@ export default function ProductItem() {
           <div className="s p-2  flex flex-col w-full">
             {choose === "tozih" ? (
               <>
-                <h1 className="  flex text-justify text-md text-gray-600 leading-8	 items-start gap-2 flex-col ">
+                <h1 className="  flex text-justify  text-md text-gray-600 leading-8	 items-start gap-2 flex-col ">
                   {Moshahede
                     ? Product?.data?.item?.description
                     : Product?.data?.item?.description.slice(0, 551) + "..."}

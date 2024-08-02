@@ -50,7 +50,14 @@ export const SearchPage = ({ setopen }: OPEN | any) => {
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 pt-3 md:grid-cols-2 sm:grid-cols-1 justify-end items-end gap-7">
             {searchitem?.data?.pages?.map((item) =>
               item?.items?.map(
-                ({ category, _id, price, title, image, description }: any) => {
+                ({
+                  category,
+                  _id,
+                  price,
+                  title,
+                  productImage,
+                  description,
+                }: any) => {
                   return (
                     <div
                       key={_id}
@@ -62,9 +69,8 @@ export const SearchPage = ({ setopen }: OPEN | any) => {
                           id={_id}
                           price={price}
                           description={description}
-                          SS
                           title={title}
-                          image={image}
+                          productImage={productImage}
                           category={category}
                         />
                       </div>

@@ -7,7 +7,7 @@ type CartItemProps = {
 };
 export const CartItem = ({ id }: CartItemProps) => {
   const Products = ProductQuery(id);
-  const { cartItems, localhost } = useShoppingCart();
+  const { cartItems } = useShoppingCart();
   const { increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
     useShoppingCart();
   if (Products.isLoading) return <LoadingPage />;
@@ -16,7 +16,7 @@ export const CartItem = ({ id }: CartItemProps) => {
       <div className="flex border-b justify-center items-center flex-col md:flex-row p-[10px_0] ">
         <img
           className="object-contain md:w-[90px] md:h-[90px] w-[250px] h-[250px]"
-          src={`${localhost}/images/` + Products?.data?.item?.image}
+          src={Products?.data?.item?.productImage[0]}
           alt="/"
         />
         <div className=" gap-3 p-3 text-[30px] w-full">
