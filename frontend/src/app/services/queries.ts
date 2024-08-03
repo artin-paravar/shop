@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import {
+  categoryANDbrandAPI,
   categoryApi,
   getProduct,
   getProducts,
@@ -34,7 +35,7 @@ export function ProductsQuery() {
     queryFn: getProducts,
   });
 }
-export function ProductQuery(id: any) {
+export function ProductQuery(id: string) {
   return useQuery({
     queryKey: ["getProduct", { id }],
     queryFn: () => getProduct(id),
@@ -60,10 +61,13 @@ export function searchProductQuery(debounced: string | undefined) {
     },
   });
 }
-export function categoryitem(Category: string | null | undefined) {
+export function categoryitem(
+  Category: string | null | undefined,
+  brand: string | null | undefined
+) {
   return useInfiniteQuery({
-    queryKey: ["category", { Category }],
-    queryFn: (pageParam) => categoryApi(pageParam, Category),
+    queryKey: ["category", { Category, brand }],
+    queryFn: (pageParam) => categoryApi(pageParam, Category, brand),
     initialPageParam: 0,
     getNextPageParam: (lastPage, _, lastPageParam) => {
       if (lastPage.items.length === 0) {
@@ -78,5 +82,15 @@ export function categoryitem(Category: string | null | undefined) {
       }
       return firstPageParam - 1;
     },
+  });
+}
+export function categoryANDbrand(
+  Category: string | null | undefined,
+  brand: string | null | undefined,
+  sort?: string
+) {
+  return useQuery({
+    queryKey: ["getProduct", { Category, brand, sort }],
+    queryFn: () => categoryANDbrandAPI(Category, brand),
   });
 }

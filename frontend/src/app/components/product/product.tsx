@@ -12,13 +12,13 @@ export const Product = ({ title, price, productImage }: Products) => {
       {changeImage ? (
         <img
           className="w-full h-[400px] object-contain    "
-          src={productImage[0]}
+          src={productImage[1]}
           alt=""
         />
       ) : (
         <img
           className="w-full h-[400px] object-contain   "
-          src={productImage[1]}
+          src={productImage[0]}
           alt=""
         />
       )}

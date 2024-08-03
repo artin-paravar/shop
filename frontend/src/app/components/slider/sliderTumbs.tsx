@@ -3,7 +3,6 @@ import "./customTumbnail.css";
 import Slider from "react-slick";
 import { Products } from "../../type/type";
 function SliderThumbs(data: Products) {
-  console.log(data.data.productImage[0]);
   const settings = {
     customPaging: function (i: number) {
       return (

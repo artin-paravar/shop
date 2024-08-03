@@ -29,32 +29,93 @@ const listitem = async (req, res) => {
     const limit = req.query.limit;
     const { search } = req.query;
     let category = req.query.category || "All";
+    let brand = req.query.brand || "All";
+    let brand2 = req.query.brand || "All";
 
-    const categoryOption = ["موبایل", "ساعت هوشمند", "اسپیکر", "کنسول بازی"];
+    const AllItems = await ShopItem.find({});
+    const AllItems2 = await ShopItem.find({ category });
+    // LowtoHigh
+    const parsePrice = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
+    const LowtoHigh = AllItems.slice().sort(
+      (a, b) => parsePrice(a.price) - parsePrice(b.price)
+    );
+
+    // HightoLow
+    const parsePrice2 = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
+    const HightoLow = AllItems.slice().sort(
+      (a, b) => parsePrice2(b.price) - parsePrice2(a.price)
+    );
+
+    // LowtoHigh
+    const parsePrice3 = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
+    const LowtoHighcategory = AllItems2.slice().sort(
+      (a, b) => parsePrice3(a.price) - parsePrice3(b.price)
+    );
+
+    // HightoLow
+    const parsePrice4 = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
+    const HightoLowcategory = AllItems2.slice().sort(
+      (a, b) => parsePrice4(b.price) - parsePrice4(a.price)
+    );
+    //category All
+    const categorymap = AllItems.map((item) => {
+      return item.category;
+    });
+
+    const setCategory = new Set([...categorymap]);
+    const itemcategory = [...setCategory];
 
     category === "All"
-      ? (category = [...categoryOption])
+      ? (category = [...itemcategory])
       : (category = req.query.category.split(","));
+
+    //Allbrand
+    const Allbrandmap = AllItems.map((item) => {
+      return item.brand;
+    });
+
+    const AllsetBrand = new Set([...Allbrandmap]);
+    const Allitembrand = [...AllsetBrand];
+
+    brand === "All"
+      ? (brand = [...Allitembrand])
+      : (brand = req.query.brand.trim().split(","));
+
+    //Selectbrand
+    const selectbrandmap = AllItems2.map((item) => {
+      return item.brand;
+    });
+
+    const selectsetBrand = new Set([...selectbrandmap]);
+    const selectitembrand = [...selectsetBrand];
+
+    brand2 === "All"
+      ? (brand2 = [...selectitembrand])
+      : (brand2 = req.query.brand.trim().split(","));
 
     //search
     const title = new RegExp(search, "i");
-    const AllItems = await ShopItem.find({});
 
     const items = await ShopItem.find({
       title: title,
     })
       .where("category")
       .in([...category])
+      .where("brand")
+      .in([...brand])
       .skip(page * limit)
       .limit(limit);
 
-    const categorymap = AllItems.map((item) => {
-      return item.category;
+    res.json({
+      LowtoHighcategory,
+      HightoLowcategory,
+      selectitembrand,
+      items,
+      itemcategory,
+      Allitembrand,
+      HightoLow,
+      LowtoHigh,
     });
-
-    const set = new Set([...categorymap]);
-    const itemcategory = [...set];
-    res.json({ items, itemcategory });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "error" });

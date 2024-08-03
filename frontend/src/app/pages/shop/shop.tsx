@@ -8,7 +8,7 @@ export const Shop = () => {
     <div className="max-w-[1400px] flex flex-col gap-10 w-full m-auto">
       <Bannershop />
       {/*  */}
-      <div className="flex gap-3 p-[20px_0] md:flex-row flex-col-reverse">
+      <div className="flex overflow-hidden gap-3 p-[20px_0] md:flex-row flex-col ">
         <ResultProduct />
         {/*  */}
         <FilterCategory />

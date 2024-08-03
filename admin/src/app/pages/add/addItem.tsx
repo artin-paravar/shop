@@ -14,7 +14,7 @@ const Additem = ({ host }: Host) => {
     price: "",
     productImage: [],
     category: "موبایل",
-    brand: "",
+    brand: "".trim(),
   });
   //
   console.log(data);
