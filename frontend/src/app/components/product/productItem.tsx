@@ -18,11 +18,9 @@ export default function ProductItem() {
   //
   const { MahsolatMortabat } = FilterApi();
 
-  if (document.title === "undefined") {
-    document.title = "loading";
-  } else {
+
     document.title = Product?.data?.item?.title;
-  }
+  
   if (Product.isLoading) return <LoadingPage />;
 
   return (
