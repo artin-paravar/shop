@@ -16,7 +16,7 @@ import { Shop } from "./pages/shop/shop";
 
 const App = () => {
   return (
-    <>
+    <> 
       <Navbar />
       <Toaster position="top-center" toastOptions={{ duration: 1500 }} />
       <Routes>
