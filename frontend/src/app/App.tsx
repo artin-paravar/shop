@@ -13,6 +13,7 @@ import { PrivateRoute } from "./privateRoute";
 import { Contact } from "./pages/contactus/contact";
 import { Footer } from "./components/footer/footer";
 import { Shop } from "./pages/shop/shop";
+
 const App = () => {
   return (
     <>
