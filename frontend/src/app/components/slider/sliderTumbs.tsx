@@ -22,7 +22,7 @@ function SliderThumbs(data: Products) {
   return (
     <Slider {...settings}>
       {data.data.productImage.map((item: string) => (
-        <img className="object-contain " src={item} alt="" />
+        <img key={item} className="object-contain " src={item} alt="" />
       ))}
     </Slider>
   );

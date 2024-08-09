@@ -9,7 +9,7 @@ import { Products } from "../type/type";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { ProductsQuery } from "../services/queries";
-const localhost = "https://shop-dz8e.onrender.com";
+const localhost = import.meta.env.VITE_BASE_URL;
 // https://shop-dz8e.onrender.com
 type ShoppingCartProviderProps = {
   children: ReactNode;
@@ -31,6 +31,7 @@ type ShoppingCartContext = {
   Category?: string | null;
   q?: string;
   brand?: string;
+  sort?: string;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -46,6 +47,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const Category = searchParams.get("category") || "All";
   const brand = searchParams.get("brand") || "All";
   const q = searchParams.get("q")?.toLowerCase().trim(); //
+  const sort = searchParams.get("sort")?.toLowerCase().trim() || "new"; //
+
   const loadCartData = async (token: any) => {
     const res = await axios.post(
       `${localhost}/api/cart/get`,
@@ -148,6 +151,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         localhost,
         Category,
         q,
+        sort,
       }}
     >
       {children}

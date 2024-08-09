@@ -92,7 +92,17 @@ export default function ProductItem() {
                     onClick={() => SetMoshahede(!Moshahede)}
                     className=" cursor-pointer flex text-sm  items-center justify-center  gap-1 text-blue-400"
                   >
-                    مشاهده بیشتر <IoIosArrowBack className="text-sm" />
+                    {Moshahede ? (
+                      <>
+                        <p> مشاهده کمتر </p>
+                        <IoIosArrowBack className="text-sm" />
+                      </>
+                    ) : (
+                      <>
+                        <p> مشاهده بیشتر </p>
+                        <IoIosArrowBack className="text-sm" />
+                      </>
+                    )}
                   </span>
                 </h1>
               </>

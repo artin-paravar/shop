@@ -31,32 +31,18 @@ const listitem = async (req, res) => {
     let category = req.query.category || "All";
     let brand = req.query.brand || "All";
     let brand2 = req.query.brand || "All";
+    let sort = req.query.sort || "new";
+
+    //sort
+    sort === "new"
+      ? (sort = "title")
+      : sort === "lowtohigh"
+      ? (sort = "price")
+      : (sort = "-price");
 
     const AllItems = await ShopItem.find({});
     const AllItems2 = await ShopItem.find({ category });
-    // LowtoHigh
-    const parsePrice = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
-    const LowtoHigh = AllItems.slice().sort(
-      (a, b) => parsePrice(a.price) - parsePrice(b.price)
-    );
 
-    // HightoLow
-    const parsePrice2 = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
-    const HightoLow = AllItems.slice().sort(
-      (a, b) => parsePrice2(b.price) - parsePrice2(a.price)
-    );
-
-    // LowtoHigh
-    const parsePrice3 = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
-    const LowtoHighcategory = AllItems2.slice().sort(
-      (a, b) => parsePrice3(a.price) - parsePrice3(b.price)
-    );
-
-    // HightoLow
-    const parsePrice4 = (x) => parseFloat(x.replace(/^\$/, "")) || 0;
-    const HightoLowcategory = AllItems2.slice().sort(
-      (a, b) => parsePrice4(b.price) - parsePrice4(a.price)
-    );
     //category All
     const categorymap = AllItems.map((item) => {
       return item.category;
@@ -92,13 +78,12 @@ const listitem = async (req, res) => {
     brand2 === "All"
       ? (brand2 = [...selectitembrand])
       : (brand2 = req.query.brand.trim().split(","));
-
     //search
     const title = new RegExp(search, "i");
-
     const items = await ShopItem.find({
       title: title,
     })
+      .sort(sort)
       .where("category")
       .in([...category])
       .where("brand")
@@ -107,14 +92,10 @@ const listitem = async (req, res) => {
       .limit(limit);
 
     res.json({
-      LowtoHighcategory,
-      HightoLowcategory,
-      selectitembrand,
       items,
+      selectitembrand,
       itemcategory,
       Allitembrand,
-      HightoLow,
-      LowtoHigh,
     });
   } catch (error) {
     console.log(error);

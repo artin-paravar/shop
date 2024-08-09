@@ -19,7 +19,7 @@ function Login() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value.toString().toLocaleLowerCase(),
+      [name]: value.trim().toLocaleLowerCase(),
     });
   };
 

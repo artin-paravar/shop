@@ -29,8 +29,8 @@ export const FilterCategory = () => {
       <div
         className={
           open
-            ? "  w-full overflow-scroll md:overflow-auto  p-8 md:p-[0_20px] md:static bg-white  pt-28 top-0 h-full transition-all md:translate-x-0 fixed flex-col gap-2 flex  sm:text-[20px] flex-1 items-center md:max-w-[300px]   text-[17px] "
-            : "  w-full   p-8 md:p-[0_20px] md:static bg-white pt-28  top-0 h-full transition-all translate-x-full  md:translate-x-0 fixed flex-col gap-2 flex  sm:text-[20px] flex-1 items-center md:max-w-[300px]   text-[17px] "
+            ? "  w-full overflow-scroll md:overflow-auto  p-8 md:p-[0_20px] md:static bg-white  pt-28 top-0 h-full md:h-auto transition-all md:translate-x-0 fixed  gap-2 sm:text-[20px]   md:max-w-[300px]   text-[17px] "
+            : "  w-full   p-8 md:p-[0_20px] md:static bg-white pt-28  top-0 h-full md:h-auto transition-all translate-x-full  md:translate-x-0 fixed  gap-2 sm:text-[20px] flex-1  md:max-w-[300px]   text-[17px] "
         }
       >
         {Allproducts.isLoading ? (
