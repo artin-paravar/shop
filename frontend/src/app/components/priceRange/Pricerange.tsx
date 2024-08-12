@@ -12,7 +12,6 @@ export default function PriceRange() {
   const max = Data?.data?.maxItem;
   const [value, setValue] = useState<number[]>([min, max]);
   //
-
   const handleChange = (
     event: Event,
     newValue: number | number[],
