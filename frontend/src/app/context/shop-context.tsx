@@ -28,10 +28,12 @@ type ShoppingCartContext = {
   localhost: any;
   searchParams: URLSearchParams;
   setSearchParams: any;
-  Category?: string | null;
+  Category?: any;
   q?: string;
-  brand?: string;
+  brand?: any;
   sort?: string;
+  max: string | number;
+  min: string | number;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -44,11 +46,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [token, setToken] = useState<any>("");
   const [searchParams, setSearchParams] = useSearchParams();
   const [user, setUser] = useState<any>();
-  const Category = searchParams.get("category") || "All";
-  const brand = searchParams.get("brand") || "All";
+  const Category = searchParams.getAll("category") || "All";
+  const brand = searchParams.getAll("brand") || "All";
   const q = searchParams.get("q")?.toLowerCase().trim(); //
   const sort = searchParams.get("sort")?.toLowerCase().trim() || "new"; //
-
+  const max = searchParams.get("max")?.trim() || 100000000000;
+  const min = searchParams.get("min")?.trim() || 0;
   const loadCartData = async (token: any) => {
     const res = await axios.post(
       `${localhost}/api/cart/get`,
@@ -152,6 +155,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         Category,
         q,
         sort,
+        max,
+        min,
       }}
     >
       {children}

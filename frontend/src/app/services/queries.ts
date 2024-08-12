@@ -63,12 +63,15 @@ export function searchProductQuery(debounced: string | undefined) {
 }
 export function categoryitem(
   Category: string | null | undefined,
-  brand: string | null | undefined,
-  sort: string | null | undefined
+  brand: any,
+  sort: string | null | undefined,
+  max: string | number | undefined,
+  min: string | number | undefined
 ) {
   return useInfiniteQuery({
-    queryKey: ["category", { Category, brand, sort }],
-    queryFn: (pageParam) => categoryApi(pageParam, Category, brand, sort),
+    queryKey: ["category", { Category, brand, sort, max, min }],
+    queryFn: (pageParam) =>
+      categoryApi(pageParam, Category, brand, sort, max, min),
     initialPageParam: 0,
     getNextPageParam: (lastPage, _, lastPageParam) => {
       if (lastPage.items.length === 0) {
@@ -88,7 +91,7 @@ export function categoryitem(
 
 export function categoryANDbrand(
   Category: string | null | undefined,
-  brand: string | null | undefined,
+  brand: any,
   sort?: string
 ) {
   return useQuery({

@@ -32,7 +32,8 @@ const listitem = async (req, res) => {
     let brand = req.query.brand || "All";
     let brand2 = req.query.brand || "All";
     let sort = req.query.sort || "new";
-
+    let max = req.query.max || 1000000000;
+    let min = req.query.min || 0;
     //sort
     sort === "new"
       ? (sort = "title")
@@ -80,18 +81,27 @@ const listitem = async (req, res) => {
       : (brand2 = req.query.brand.trim().split(","));
     //search
     const title = new RegExp(search, "i");
+
     const items = await ShopItem.find({
       title: title,
+      price: { $gte: min, $lte: max },
+      category: {
+        $in: category,
+      },
+      brand: {
+        $in: brand,
+      },
     })
       .sort(sort)
-      .where("category")
-      .in([...category])
-      .where("brand")
-      .in([...brand])
       .skip(page * limit)
       .limit(limit);
 
+    const maxItem = Math.max(...items?.map((items) => items?.price));
+    const minItem = Math.min(...items?.map((items) => items?.price));
+
     res.json({
+      maxItem,
+      minItem,
       items,
       selectitembrand,
       itemcategory,

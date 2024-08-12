@@ -33,18 +33,20 @@ export async function searchandFilterItem(
 export async function categoryApi(
   { pageParam }: { pageParam: any },
   Category: string | null | undefined,
-  brand: string | null | undefined,
-  sort: string | null | undefined
+  brand: any,
+  sort: string | null | undefined,
+  max: string | number | undefined,
+  min: string | number | undefined
 ) {
   const { data } = await client(
-    `/api/shopitem/list?page=${pageParam}&&limit=6&&category=${Category}&&brand=${brand}&&sort=${sort}`
+    `/api/shopitem/list?page=${pageParam}&&limit=6&&category=${Category}&&brand=${brand}&&sort=${sort}&&max=${max}&&min=${min}`
   );
   return data;
 }
 
 export async function categoryANDbrandAPI(
   Category: string | null | undefined,
-  brand: string | null | undefined
+  brand: any
 ) {
   const { data } = await client(
     `/api/shopitem/list?category=${Category}&brand=${brand}`

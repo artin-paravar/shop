@@ -8,10 +8,10 @@ import { useEffect } from "react";
 import { Loadinginfinite } from "../loading/loadinginfinite";
 
 export const ResultProduct = () => {
-  const { Category, brand, sort, setSearchParams } = useShoppingCart();
+  const { Category, brand, sort, setSearchParams, max, min } =
+    useShoppingCart();
   const { ref, inView } = useInView();
-  const itemCategory = categoryitem(Category, brand, sort);
-
+  const itemCategory = categoryitem(Category, brand, sort, max, min);
   useEffect(() => {
     if (inView && itemCategory.hasNextPage) {
       itemCategory.fetchNextPage();
@@ -46,8 +46,12 @@ export const ResultProduct = () => {
             <SkeletonPage cards={9} />
           </div>
         </>
+      ) : itemCategory.data?.pages[0]?.items?.length <= 0 ? (
+        <p className="  w-full  flex items-center justify-center text-[20px]">
+          نتیجه ای یافت نشد
+        </p>
       ) : (
-        <div className="lg:grid-cols-3 md:grid-cols-2 grid gap-4 place-items-center">
+        <div className="relative lg:grid-cols-3 md:grid-cols-2 grid gap-4 place-items-center">
           {itemCategory?.data?.pages?.map((item: Products) => {
             return item?.items?.map(
               ({ _id, productImage, price, title }: Products) => {
@@ -67,6 +71,7 @@ export const ResultProduct = () => {
           })}
         </div>
       )}
+
       <div className=" flex justify-center  m-[40px_0]">
         {itemCategory.isFetching && itemCategory.hasNextPage ? (
           <Loadinginfinite />
