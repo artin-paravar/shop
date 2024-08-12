@@ -6,7 +6,7 @@ import { FaFilter } from "react-icons/fa";
 import { categoryANDbrand, ProductsQuery } from "../../services/queries";
 import { Products } from "../../type/type";
 import { IoMdClose } from "react-icons/io";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PriceRange from "../priceRange/Pricerange";
 
 export const FilterCategory = () => {
@@ -225,7 +225,7 @@ export const FilterCategory = () => {
               ) : (
                 Allproducts2?.data?.selectitembrand?.map(
                   (item: Products, index: number) => {
-                    const isActive = item == brand[index];
+                    // const isActive = item == brand[index];
                     return (
                       <div className="w-full flex gap-2" key={index}>
                         <div className=" flex items-center gap-2 w-full cursor-pointer text-[16px] ">
