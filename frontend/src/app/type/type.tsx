@@ -23,3 +23,10 @@ export type footer = {
 export type OPEN = {
   open: boolean;
 };
+export type ITEM = {
+  item?: any;
+  selectCategory?: any;
+  selectBrand?: any;
+  setSelectCategory?: React.Dispatch<any>;
+  setSelectBrand?: React.Dispatch<any>;
+};
