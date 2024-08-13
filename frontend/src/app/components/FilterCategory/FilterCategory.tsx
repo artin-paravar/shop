@@ -52,7 +52,7 @@ export const FilterCategory = () => {
         onClick={() => setOpen(true)}
         className=" cursor-pointer md:hidden gap-1 -translate-y-12  flex bg-white rounded-lg p-2 fixed border text-xl"
       >
-        <FaFilter /> <p className="text-sm">فیلتر</p>;
+        <FaFilter /> <p className="text-sm">فیلتر</p>
       </span>
       <div
         className={
